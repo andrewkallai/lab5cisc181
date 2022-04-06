@@ -106,4 +106,9 @@ public class PieceBlueHen extends Piece{
     public boolean canSpawn(){
         return true;
     }
+
+    public static void main(String args[])
+    {
+        System.out.println("Hi");
+    }
 }
