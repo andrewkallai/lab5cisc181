@@ -22,4 +22,8 @@ public abstract class Piece {
         this.hidden = hidden;
         this.original = original;
     }
+    @Override
+    public String toString(){
+        return teamColor + " " + symbol;
+    }
 }

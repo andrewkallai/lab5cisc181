@@ -20,11 +20,17 @@ public class PieceBuzz extends Piece{
         this.numTimesBeenAttacked = numTimesBeenAttacked;
         this.workingLaser = workingLaser;
     }
-
+/*
     public PieceBuzz(){
         this(0,0, true);
     }
-
+*/
+public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeenAttacked, boolean workingLaser, boolean hidden, boolean original) {
+    super(symbol,teamColor, hidden, original);
+    this.numAttacks = numAttacks;
+    this.numTimesBeenAttacked = numTimesBeenAttacked;
+    this.workingLaser = workingLaser;
+}
     public char getSymbol() {
         return symbol;
     }

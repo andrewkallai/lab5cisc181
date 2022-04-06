@@ -28,11 +28,11 @@ public class PieceBlueHen extends Piece{
         this.numRecruits = numRecruits;
         updateFly();
     }
-
+/*
     public PieceBlueHen ()  {
         this(0,0);
     }
-
+*/
     public char getSymbol() {
         return symbol;
     }
