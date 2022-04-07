@@ -20,16 +20,17 @@ public class PieceMinion extends Piece{
         this.numRecruits = numRecruits;
         this.numTimesSpawned = numTimesSpawned;
     }
+
     public PieceMinion(char symbol, String teamColor, int numRecruits, int numTimesSpawned, boolean hidden, boolean original) {
         super(symbol,teamColor, hidden, original);
         this.numRecruits = numRecruits;
         this.numTimesSpawned = numTimesSpawned;
     }
-/*
+
     public PieceMinion(){
         this(0,0);
     }
-*/
+
     public char getSymbol() {
         return symbol;
     }

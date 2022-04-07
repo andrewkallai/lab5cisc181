@@ -11,6 +11,7 @@
  * check that return index of random thing is not always zero (could be an issue with parenthesis)
  * consolidate multiple method calls into one large method call
  */
+
 public abstract class Piece {
     protected char symbol;
     protected String teamColor;
