@@ -31,12 +31,7 @@ public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeen
     this.numTimesBeenAttacked = numTimesBeenAttacked;
     this.workingLaser = workingLaser;
 }
-    public char getSymbol() {
-        return symbol;
-    }
-    public String getTeamColor() {
-        return teamColor;
-    }
+
     public int getNumAttacks() {
         return numAttacks;
     }
@@ -60,12 +55,7 @@ public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeen
     public void setWorkingLaser(boolean workingLaser) {
         this.workingLaser = workingLaser;
     }
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-    public void setOriginal(boolean original) {
-        this.original = original;
-    }
+
 
     public void setNumAttacks(int numAttacks)  {
         this.numAttacks = numAttacks;

@@ -31,12 +31,6 @@ public class PieceMinion extends Piece{
         this(0,0);
     }
 
-    public char getSymbol() {
-        return symbol;
-    }
-    public String getTeamColor() {
-        return teamColor;
-    }
     public int getNumRecruits() {
         return numRecruits;
     }
@@ -50,9 +44,6 @@ public class PieceMinion extends Piece{
         return original;
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
     public void setOriginal(boolean original){
         this.original = original;
     }
