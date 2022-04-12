@@ -53,6 +53,8 @@ public abstract class Piece {
 
     public abstract void speak();
 
+    public abstract Piece spawn();
+
     @Override
     public String toString(){
         return teamColor + " " + symbol;

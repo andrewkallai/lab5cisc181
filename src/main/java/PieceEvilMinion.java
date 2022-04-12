@@ -48,6 +48,7 @@ public class PieceEvilMinion extends PieceMinion
 
     public PieceEvilMinion spawn()
     {
+        this.numTimesSpawned += 1;
         return new PieceEvilMinion(Character.toLowerCase(this.symbol),
                 this.teamColor, 1, 0, 0, false, false);
     }
