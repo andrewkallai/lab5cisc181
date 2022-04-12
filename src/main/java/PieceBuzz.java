@@ -46,16 +46,9 @@ public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeen
     }
     public boolean isOriginal(){ return original;}
 
-    public void setSymbol(char symbol) {
-        this.symbol = symbol;
-    }
-    public void setTeamColor(String teamColor) {
-        this.teamColor = teamColor;
-    }
     public void setWorkingLaser(boolean workingLaser) {
         this.workingLaser = workingLaser;
     }
-
 
     public void setNumAttacks(int numAttacks)  {
         this.numAttacks = numAttacks;
@@ -84,3 +77,5 @@ public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeen
     }
 
 }
+
+// 4/11 changes: removed setSymbol and setTeamColor and implemented in Piece class.

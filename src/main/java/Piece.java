@@ -43,6 +43,13 @@ public abstract class Piece {
     public void setOriginal(boolean original) {
         this.original = original;
     }
+    public void setTeamColor(String teamColor) {
+        this.teamColor = teamColor;
+    }
+    public void setSymbol(char symbol)
+    {
+        this.symbol = symbol;
+    }
 
     public abstract void speak();
 
@@ -51,3 +58,5 @@ public abstract class Piece {
         return teamColor + " " + symbol;
     }
 }
+
+// 4/11 changes: removed setSymbol and setTeamColor and implemented in Piece class.

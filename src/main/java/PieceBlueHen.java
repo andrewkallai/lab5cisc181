@@ -44,13 +44,6 @@ public class PieceBlueHen extends Piece{
         return this.flies;
     }
 
-    public void setSymbol(char symbol) {
-        this.symbol = symbol;
-    }
-    public void setTeamColor(String teamColor) {
-        this.teamColor = teamColor;
-    }
-
     public void setNumAttacks(int numAttacks)    {
         this.numAttacks = numAttacks;
         updateFly();
@@ -82,7 +75,8 @@ public class PieceBlueHen extends Piece{
         return true;
     }
 
-    public PieceBlueHen spawn()    {
+    public PieceBlueHen spawn()
+    {
         PieceBlueHen copyHen =
                 new PieceBlueHen(Character.toLowerCase(this.symbol),
                         this.teamColor,this.numAttacks,this.numRecruits,
@@ -93,10 +87,6 @@ public class PieceBlueHen extends Piece{
     public boolean canSpawn(){
         return true;
     }
-
-    public static void main(String args[]){
-        //wow
-        //I wrote this code
-    }
 }
 
+// 4/11 changes: removed setSymbol and setTeamColor and implemented in Piece class.

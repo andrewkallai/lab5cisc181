@@ -10,10 +10,45 @@ public class PieceEvilMinion extends PieceMinion
     {
         super(symbol, teamColor, numRecuits, numTimesSpawned, hidden, original);
         this.numAttacks = numAttacks;
+        updateHungry();
     }
 
     public PieceEvilMinion()
     {
         this('E', "NON", 0, 0, 0, false, true);
+    }
+
+    public int getNumAttacks() {
+        return numAttacks;
+    }
+
+    public boolean canAttack()
+    {
+        return hungry;
+    }
+
+    public void setNumAttacks(int numAttacks) {
+        this.numAttacks = numAttacks;
+    }
+
+    public void updateHungry()
+    {
+        this.hungry = this.numAttacks < MAX_NUM_ATTACKS;
+    }
+
+    public void speak()
+    {
+        System.out.println("Roar!");
+    }
+
+    public boolean validMovePath()
+    {
+        return true;
+    }
+
+    public PieceEvilMinion spawn()
+    {
+        return new PieceEvilMinion(Character.toLowerCase(this.symbol),
+                this.teamColor, 1, 0, 0, false, false);
     }
 }
