@@ -14,6 +14,7 @@ public class BoardSquare {
     public String getSquareColor(){
         return this.color;
     }
+
     public void setPiece(Piece gamePiece){
         representPiece = gamePiece;
         isEmpty = false;

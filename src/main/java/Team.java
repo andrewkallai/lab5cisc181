@@ -1,28 +1,40 @@
+import java.util.ArrayList;
+
 public class Team {
     private String teamColor;
-    private Piece[] ArrayList;
-    public Team(String teamColor, Piece[] ArrayList){
+    private ArrayList<Piece> pieces;
+
+    public Team(String teamColor, ArrayList<Piece> pieces)
+    {
         this.teamColor = teamColor;
-        this.ArrayList = ArrayList;
+        this.pieces = pieces;
     }
-    public String getTeamColor(){
+
+    public String getTeamColor()
+    {
         return this.teamColor;
     }
-    public Piece[] getTeamPieces(){
-        return this.ArrayList;
+
+    public ArrayList<Piece> getTeamPieces()
+    {
+        return this.pieces;
     }
-    public void removePieceFromTeam(Piece gamePiece){
-        for (int i=0;i<this.ArrayList.length;i++){
-            if (this.ArrayList[i] == gamePiece){
-                this.ArrayList[i] = null;
+
+    public void removePieceFromTeam(Piece gamePiece)
+    {
+        for (int i=0;i<this.pieces.size();i++){
+            if (this.pieces.get(i) == gamePiece){
+                this.pieces.set(i, null);
             }
         }
     }
-    public void addPieceFromTeam(Piece gamePiece){
-        for (int i=0;i<this.ArrayList.length;i++){
-            if (this.ArrayList[i] == null) {
+
+    public void addPieceFromTeam(Piece gamePiece)
+    {
+        for (int i=0;i<this.pieces.size();i++){
+            if (this.pieces.get(i) == null) {
                 gamePiece.setTeamColor(this.teamColor);
-                this.ArrayList[i] = gamePiece;
+                this.pieces.set(i, gamePiece);
             }
             else{
                 //make the array longer

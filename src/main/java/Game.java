@@ -1,53 +1,91 @@
-import java.util.Collections;
+import java.util.*;
 
 public class Game
 {
-    private GameBoard gameBoard;
-    private Team team1;
-    private Team team2;
+    private GameBoard board;
+    private Team teamOne;
+    private Team teamTwo;
     private String turn;
 
     private void initializeGameBoard(int numRows, int numColumns)
     {
-        gameBoard = new GameBoard(numRows, numColumns);
-        // set up each Team's pieces at random squares
+        board = new GameBoard(numRows, numColumns);
+        ArrayList<Piece> teamOnePieces = teamOne.getTeamPieces();
+        ArrayList<Piece> teamTwoPieces = teamTwo.getTeamPieces();
+
+        for(Piece teamOnePiece : teamOnePieces)
+        {
+            board.findRandomEmptySpace().setPiece(teamOnePiece);
+        }
+
+        for(Piece teamTwoPiece : teamTwoPieces)
+        {
+            board.findRandomEmptySpace().setPiece(teamTwoPiece);
+        }
     }
 
     public Game(int numRows, int numColumns, Team team1, Team team2)
     {
-        this.team1 = team1;
-        this.team2 = team2;
-        turn = team1.name // get name of first team passed
+        this.teamOne = team1;
+        this.teamTwo = team2;
+        turn = team1.getTeamColor(); // get color of first team passed
         initializeGameBoard(numRows, numColumns);
     }
 
     public GameBoard getGameBoard() {
-        return gameBoard;
+        return board;
     }
 
     public Team getCurrentTeam()
     {
-        // Return team whose has the current turn
+        Team currentTeam;
+        if(teamOne.getTeamColor().equals(turn))
+        {
+            currentTeam = teamOne;
+        }
+        else
+        {
+            currentTeam = teamTwo;
+        }
+
+        return currentTeam;
     }
 
     public Team getOpponentTeam()
     {
-        // return the other team
+        Team opponentTeam;
+        if(teamOne.getTeamColor().equals(turn))
+        {
+            opponentTeam = teamTwo;
+        }
+        else
+        {
+            opponentTeam = teamOne;
+        }
+
+        return opponentTeam;
     }
 
     public boolean isTurn(Team team)
     {
-        // return if argument team has the current turn
+        return team.getTeamColor().equals(turn);
     }
 
-    public BoardSquare getBoardSquares()
+    public BoardSquare[][] getBoardSquares()
     {
-        // get 2d array of board squares
+        return board.getSquares();
     }
 
     public void changeTurn()
     {
-        // change current team's turn
+        if(teamOne.getTeamColor().equals(turn))
+        {
+            turn = teamTwo.getTeamColor();
+        }
+        else
+        {
+            turn = teamOne.getTeamColor();
+        }
     }
 
     @Override
