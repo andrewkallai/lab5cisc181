@@ -52,10 +52,6 @@ public class PieceBlueHen extends Piece{
         this.numRecruits = numRecruits;
     }
 
-    public void setOriginal(boolean original) {
-        this.original = original;
-    }
-
     private void updateFly(){
         if (this.numAttacks < MAX_NUM_ATTACKS){
             this.flies = true;

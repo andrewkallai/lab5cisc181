@@ -37,16 +37,7 @@ public class PieceMinion extends Piece{
     public int getNumTimesSpawned() {
         return numTimesSpawned;
     }
-    public boolean isHidden() {
-        return hidden;
-    }
-    public boolean isOriginal() {
-        return original;
-    }
 
-    public void setOriginal(boolean original){
-        this.original = original;
-    }
 
     public void setNumRecruits(int numRecruits) {
         this.numRecruits = numRecruits;

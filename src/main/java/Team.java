@@ -24,22 +24,21 @@ public class Team {
     {
         for (int i=0;i<this.pieces.size();i++){
             if (this.pieces.get(i) == gamePiece){
-                this.pieces.set(i, null);
+                this.pieces.remove(i);
             }
         }
     }
 
-    public void addPieceFromTeam(Piece gamePiece)
-    {
-        for (int i=0;i<this.pieces.size();i++){
-            if (this.pieces.get(i) == null) {
-                gamePiece.setTeamColor(this.teamColor);
-                this.pieces.set(i, gamePiece);
-            }
-            else{
-                //make the array longer
-            }
-        }
+    public void addPieceToTeam(Piece gamePiece) {
+            gamePiece.setTeamColor(getTeamColor());
+            this.pieces.add(0, gamePiece);
     }
-    //toString loop in loop
+    @Override
+    public String toString(){
+        String holdString = "";
+        for(int index = 0;index<this.pieces.size();index++){
+            holdString = holdString + pieces.get(index).toString() + " ";
+        }
+        return "Team " + this.teamColor + " Pieces :\n" + holdString;
+    }
 }

@@ -41,10 +41,6 @@ public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeen
     public boolean canAttack(){
         return workingLaser;
     }
-    public boolean isHidden() {
-        return hidden;
-    }
-    public boolean isOriginal(){ return original;}
 
     public void setWorkingLaser(boolean workingLaser) {
         this.workingLaser = workingLaser;
