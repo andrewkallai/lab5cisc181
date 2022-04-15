@@ -1,15 +1,15 @@
 /**
- * <h1>Lab3</h1>
+ * <h1>Lab5</h1>
  * <h2>CISC181 181-080L Spring 2022</h2>
  * <h3>University of Delaware</h3>
  * <p>
- *
+ *Abstract class Piece extended by PieceBlueHen, PieceMinion, and PieceBuzz.
  * </p>
  *
  * @author Andrew Kallai
- * @since 2022-03-2
- * check that return index of random thing is not always zero (could be an issue with parenthesis)
- * consolidate multiple method calls into one large method call
+ * @author Leon Giang
+ * @since 2022-04-5
+ *
  */
 
 public abstract class Piece {
@@ -51,14 +51,23 @@ public abstract class Piece {
         this.symbol = symbol;
     }
 
+    /**abstract method speak is to be implemented in another class
+     * @return void
+     */
     public abstract void speak();
 
+    /**
+     * abstract method spawn is to be implemented in another class
+     * @return Piece
+     */
     public abstract Piece spawn();
 
+
+    /**Overrides toString method to return a piece's team color and symbol.
+     * @return String
+     */
     @Override
     public String toString(){
         return teamColor + " " + symbol;
     }
 }
-
-// 4/11 changes: removed setSymbol and setTeamColor and implemented in Piece class.

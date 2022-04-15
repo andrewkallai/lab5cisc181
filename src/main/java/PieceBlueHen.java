@@ -1,13 +1,14 @@
 /**
- * <h1>Lab3</h1>
+ * <h1>Lab5</h1>
  * <h2>CISC181 181-080L Spring 2022</h2>
  * <h3>University of Delaware</h3>
  * <p>
- *
+ *Creates a PieceBlueHen game piece for the game board. Extends the Piece.java class.
  * </p>
  *
  * @author Andrew Kallai
- * @since 2022-03-2
+ * @author Leon Giang
+ * @since 2022-04-5
  */
 public class PieceBlueHen extends Piece{
     private int numAttacks;
@@ -28,12 +29,8 @@ public class PieceBlueHen extends Piece{
         this.numRecruits = numRecruits;
         updateFly();
     }
-/*
-    public PieceBlueHen ()  {
-        this(0,0);
-    }
-*/
-    public int getNumAttacks()    {
+
+    public int getNumAttacks(){
         return this.numAttacks;
     }
     public int getNumRecruits(){
@@ -60,10 +57,22 @@ public class PieceBlueHen extends Piece{
             this.flies = false;
         }
     }
+
+    /**Prints out "Go UD!" Inherits features from the abstract speak method in Piece.
+     * @return void
+     */
     public void speak(){
         System.out.println("Go UD!");
     }
 
+    /**
+     * Confirms that the Piece has a valid path.
+     * @param fromSquareRow: int
+     * @param fromSquareCol: int
+     * @param toSquareRow: int
+     * @param toSquareCol: int
+     * @return boolean
+     */
     public boolean validMovePath(int fromSquareRow, int fromSquareCol,
                                  int toSquareRow, int toSquareCol) {
         // You will implement this method in a later step
@@ -71,6 +80,11 @@ public class PieceBlueHen extends Piece{
         return true;
     }
 
+    /**
+     * Takes a PieceBlueHen and makes a copy of it: only hidden status and original status are uniquely set.
+     * Inherits features from spawn in Piece.
+     * @return PieceBlueHen
+     */
     public PieceBlueHen spawn()
     {
         PieceBlueHen copyHen =
@@ -80,9 +94,12 @@ public class PieceBlueHen extends Piece{
         return copyHen;
     }
 
+    /**
+     * Confirms that the PieceBlueHen can be created.
+     * @return boolean
+     */
     public boolean canSpawn(){
         return true;
     }
 }
 
-// 4/11 changes: removed setSymbol and setTeamColor and implemented in Piece class.

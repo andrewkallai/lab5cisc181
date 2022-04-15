@@ -1,3 +1,15 @@
+/**
+ * <h1>Lab5</h1>
+ * <h2>CISC181 181-080L Spring 2022</h2>
+ * <h3>University of Delaware</h3>
+ * <p>
+ *Sets up the board squares for the game board.
+ * </p>
+ *
+ * @author Andrew Kallai
+ * @author Leon Giang
+ * @since 2022-04-5
+ */
 public class GameBoard
 {
     private int numRows;
@@ -27,11 +39,22 @@ public class GameBoard
 
     // accepts row index and column index to check if that point is inbounds
     // Point is in-bounds if point is less than number of columns and rows and the point is positive
+
+    /**
+     * Checks if the point is inbounds.
+     * @param row: int
+     * @param column: int
+     * @return boolean
+     */
     public boolean inBounds(int row, int column)
     {
         return (row < this.numRows && column < this.numColumns) && (row >= 0 && column >= 0);
     }
 
+    /**
+     * Sets up an empty board of BoardSquares.
+     * @return void
+     */
     private void setUpEmptyBoard()
     {
         for(int row = 0; row < numRows; row++)
@@ -53,6 +76,10 @@ public class GameBoard
         }
     }
 
+    /**
+     * Returns the location of an empty space on the game board.
+     * @return BoardSquare
+     */
     public BoardSquare findRandomEmptySpace()
     {
         int row = (int)(Math.random() * numRows);
@@ -67,6 +94,11 @@ public class GameBoard
         return squares[row][column];
     }
 
+
+    /**
+     * Returns the makeup of the game board in a string format.
+     * @return String
+     */
     @Override
     public String toString(){
         StringBuilder boardString = new StringBuilder();

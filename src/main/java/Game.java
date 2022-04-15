@@ -88,6 +88,10 @@ public class Game
         }
     }
 
+
+    /**Returns information (positions, names) about Pieces on the game board in a string format.
+     * @return String
+     */
     @Override
     public String toString()
     {
