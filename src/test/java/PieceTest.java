@@ -188,4 +188,26 @@ class PieceTest {
         }
     }
 
+    @Test
+    public void test_EvilMinion2()
+    {
+        System.out.println("Testing Evil Minion Piece v2");
+        PieceEvilMinion bob = new PieceEvilMinion('E',
+                "Blu",4,2,3,
+                true,false);
+
+        PieceEvilMinion newBob = bob.spawn();
+        assertTrue(newBob instanceof PieceMinion);
+
+        assertEquals('e', newBob.getSymbol());
+        assertEquals(1,newBob.getNumRecruits());
+        assertEquals(0,newBob.getNumAttacks());
+        assertEquals(0,newBob.getNumTimesSpawned());
+        assertFalse(newBob.isHidden());
+        assertFalse(newBob.isOriginal());
+        assertTrue(newBob.canAttack());
+
+        assertEquals(4, bob.getNumTimesSpawned());
+    }
+
 }

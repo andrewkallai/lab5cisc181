@@ -37,17 +37,16 @@ public class GameBoard
         return squares;
     }
 
-    // accepts row index and column index to check if that point is inbounds
-    // Point is in-bounds if point is less than number of columns and rows and the point is positive
-
     /**
      * Checks if the point is inbounds.
-     * @param row: int
-     * @param column: int
-     * @return boolean
+     * @param row: int for the row to check
+     * @param column: int for the column to check
+     * @return boolean for whether the row,column pair is inbounds
      */
     public boolean inBounds(int row, int column)
     {
+        // accepts row index and column index to check if that point is inbounds
+        // Point is in-bounds if point is less than number of columns and rows and the point is positive
         return (row < this.numRows && column < this.numColumns) && (row >= 0 && column >= 0);
     }
 

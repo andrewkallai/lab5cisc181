@@ -42,13 +42,29 @@ public class TeamTest {
         assertEquals(3,teamA.getTeamPieces().size());
         assertFalse(teamA.getTeamPieces().contains(blueYoudee));
 
+        // more remove piece tests
+        ArrayList<Piece> piecesTeamZ = new ArrayList<>();
+        piecesTeamZ.add(blueKevin);
+        piecesTeamZ.add(blueBuzz);
+        piecesTeamZ.add(blueYoudee);
+        piecesTeamZ.add(blueBob);
+
+        Team teamZ = new Team("Bla",piecesTeamZ);
+        assertEquals(4, teamZ.getTeamPieces().size());
+        teamZ.removePieceFromTeam(blueBob);
+        assertEquals(3, teamZ.getTeamPieces().size());
+        teamZ.removePieceFromTeam(blueKevin);
+        assertEquals(2, teamZ.getTeamPieces().size());
+
         // create another Team object
         ArrayList<Piece> piecesTeamB = new ArrayList<>();
         Team teamB = new Team("Red",piecesTeamB);
         // add a Piece the blueYoudee to team B
         teamB.addPieceToTeam(blueYoudee);
+//        teamZ.addPieceToTeam(blueKevin);
         //check that blueYoudee color was changed to Red
         assertEquals("Red",blueYoudee.getTeamColor());
+//        assertEquals("Bla", blueKevin.getTeamColor());
 
         // check team B pieces
         assertEquals(1,teamB.getTeamPieces().size());

@@ -16,6 +16,7 @@ public class PieceEvilMinion extends PieceMinion {
 
     public static int MAX_NUM_ATTACKS = 4;
 
+    // 7 Argument Constructor
     public PieceEvilMinion(char symbol, String teamColor, int numRecuits, int numAttacks,
                            int numTimesSpawned, boolean hidden, boolean original)
     {
@@ -24,11 +25,13 @@ public class PieceEvilMinion extends PieceMinion {
         updateHungry();
     }
 
+    // Default empty constructor
     public PieceEvilMinion()
     {
         this('E', "NON", 0, 0, 0, false, true);
     }
 
+    // Getters
     public int getNumAttacks() {
         return numAttacks;
     }
@@ -38,6 +41,7 @@ public class PieceEvilMinion extends PieceMinion {
         return hungry;
     }
 
+    // Setters
     public void setNumAttacks(int numAttacks) {
         this.numAttacks = numAttacks;
     }
@@ -47,7 +51,8 @@ public class PieceEvilMinion extends PieceMinion {
         this.hungry = this.numAttacks < MAX_NUM_ATTACKS;
     }
 
-    /**Prints out "Roar!". Inherits features from the speak method in PieceMinion.
+    /**Prints out "Roar!".
+     * Implementation of the abstract speak method in Piece.
      * @return void
      */
     public void speak()

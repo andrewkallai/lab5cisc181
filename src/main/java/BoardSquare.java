@@ -10,23 +10,33 @@
  * @author Leon Giang
  * @since 2022-04-5
  */
-public class BoardSquare {
-    private boolean isEmpty = true;
+public class BoardSquare
+{
+    private boolean isEmpty;
     private Piece representPiece;
     private String color;
+
+    // Default constructor. Creates an empty square with argument color
     public BoardSquare(String color){
         this.color = color;
+        isEmpty = true;
     }
+
+    // Getters
     public Piece getPiece(){
-        return representPiece;
+        return this.representPiece;
     }
     public boolean isEmpty(){
-        return isEmpty;
+        return this.isEmpty;
     }
     public String getSquareColor(){
         return this.color;
     }
 
+    /**
+     * Puts the piece given in the argument on a square.
+     * @param gamePiece Game Piece to place on board square
+     */
     public void setPiece(Piece gamePiece){
         representPiece = gamePiece;
         isEmpty = false;
@@ -34,7 +44,7 @@ public class BoardSquare {
 
     /**
      * Removes a Piece from the board square.
-     * @return Piece
+     * @return the Piece removed
      */
     public Piece removePiece(){
         Piece holdReturn = representPiece;

@@ -10,7 +10,8 @@
  * @author Leon Giang
  * @since 2022-04-5
  */
-public class PieceBlueHen extends Piece{
+public class PieceBlueHen extends Piece
+{
     private int numAttacks;
     private int numRecruits;
     private boolean flies;
@@ -23,6 +24,7 @@ public class PieceBlueHen extends Piece{
         this.numRecruits = numRecruits;
         updateFly();
     }
+
     public PieceBlueHen (char symbol, String teamColor, int numAttacks, int numRecruits, boolean hidden, boolean original){
         super(symbol,teamColor, hidden, original);
         this.numAttacks = numAttacks;
@@ -45,6 +47,7 @@ public class PieceBlueHen extends Piece{
         this.numAttacks = numAttacks;
         updateFly();
     }
+
     public void setNumRecruits(int numRecruits)    {
         this.numRecruits = numRecruits;
     }
@@ -58,7 +61,8 @@ public class PieceBlueHen extends Piece{
         }
     }
 
-    /**Prints out "Go UD!" Inherits features from the abstract speak method in Piece.
+    /**Prints out "Go UD!"
+     * Implementation of abstract speak method in Piece.
      * @return void
      */
     public void speak(){

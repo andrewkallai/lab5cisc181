@@ -15,6 +15,7 @@ public class PieceBuzz extends Piece{
     private int numTimesBeenAttacked;
     private boolean workingLaser;
 
+    // 3 argument constructor
     public PieceBuzz(int numAttacks, int numTimesBeenAttacked, boolean workingLaser) {
         super('B',"- -", false, true);
         this.numAttacks = numAttacks;
@@ -22,13 +23,15 @@ public class PieceBuzz extends Piece{
         this.workingLaser = workingLaser;
     }
 
-public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeenAttacked, boolean workingLaser, boolean hidden, boolean original) {
-    super(symbol,teamColor, hidden, original);
-    this.numAttacks = numAttacks;
-    this.numTimesBeenAttacked = numTimesBeenAttacked;
-    this.workingLaser = workingLaser;
-}
+    // 7 argument constructor
+    public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeenAttacked, boolean workingLaser, boolean hidden, boolean original) {
+        super(symbol,teamColor, hidden, original);
+        this.numAttacks = numAttacks;
+        this.numTimesBeenAttacked = numTimesBeenAttacked;
+        this.workingLaser = workingLaser;
+    }
 
+    // Getters
     public int getNumAttacks() {
         return numAttacks;
     }
@@ -39,20 +42,20 @@ public PieceBuzz(char symbol, String teamColor, int numAttacks, int numTimesBeen
         return workingLaser;
     }
 
+    // Setters
     public void setWorkingLaser(boolean workingLaser) {
         this.workingLaser = workingLaser;
     }
-
     public void setNumAttacks(int numAttacks)  {
         this.numAttacks = numAttacks;
     }
-
     public void updateNumTimesBeenAttacked(){
         this.numTimesBeenAttacked += 1;
         this.workingLaser = false;
     }
 
-    /**Prints out "To Infinity and Beyond!" Inherits features from the abstract speak method in Piece.
+    /**Prints out "To Infinity and Beyond!"
+     * Implementation of the abstract speak method in Piece.
      * @return void
      */
     public void speak(){

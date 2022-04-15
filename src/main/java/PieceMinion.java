@@ -44,7 +44,8 @@ public class PieceMinion extends Piece{
         this.numRecruits = numRecruits;
     }
 
-    /**Prints out "Bello!" Inherits features from the abstract speak method in Piece.
+    /**Prints out "Bello!"
+     * Implementation of the abstract speak method in Piece.
      * @return void
      */
     public void speak(){

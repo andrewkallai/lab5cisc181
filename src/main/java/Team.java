@@ -15,12 +15,14 @@ public class Team {
     private String teamColor;
     private ArrayList<Piece> pieces;
 
+    // default constructor to create a team with a color and arraylist of pieces
     public Team(String teamColor, ArrayList<Piece> pieces)
     {
         this.teamColor = teamColor;
         this.pieces = pieces;
     }
 
+    // getters
     public String getTeamColor()
     {
         return this.teamColor;
@@ -33,16 +35,12 @@ public class Team {
 
     /**
      * Removes a Piece from the array of Pieces held by a team.
-     * @param gamePiece
+     * @param gamePiece to remove from a team
      * @return void
      */
     public void removePieceFromTeam(Piece gamePiece)
     {
-        for (int i=0;i<this.pieces.size();i++){
-            if (this.pieces.get(i) == gamePiece){
-                this.pieces.remove(i);
-            }
-        }
+        this.pieces.remove(gamePiece);
     }
 
     /**
@@ -50,9 +48,10 @@ public class Team {
      * @param gamePiece
      * @return void
      */
-    public void addPieceToTeam(Piece gamePiece) {
-            gamePiece.setTeamColor(getTeamColor());
-            this.pieces.add(0, gamePiece);
+    public void addPieceToTeam(Piece gamePiece)
+    {
+        gamePiece.setTeamColor(this.getTeamColor());
+        this.pieces.add(0, gamePiece);
     }
 
     /**Returns the Piece colors and symbols of the Pieces that belong to a Team.

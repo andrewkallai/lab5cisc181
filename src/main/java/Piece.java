@@ -12,7 +12,8 @@
  *
  */
 
-public abstract class Piece {
+public abstract class Piece
+{
     protected char symbol;
     protected String teamColor;
     protected boolean hidden ;
@@ -24,29 +25,39 @@ public abstract class Piece {
         this.hidden = hidden;
         this.original = original;
     }
-    public char getSymbol() {
+
+    // Getters for all properties
+    public char getSymbol() // gets piece's symbol
+    {
         return symbol;
     }
-    public String getTeamColor() {
+    public String getTeamColor() // gets piece's team color
+    {
         return teamColor;
     }
-    public boolean isHidden() {
+    public boolean isHidden() // gets whether the piece is hidden or not
+    {
         return hidden;
     }
-    public boolean isOriginal() {
+    public boolean isOriginal() // gets whether the piece is original or not
+    {
         return original;
     }
 
-    public void setHidden(boolean hidden) {
+    // Setters for all properties
+    public void setHidden(boolean hidden) // sets hidden property to argument
+    {
         this.hidden = hidden;
     }
-    public void setOriginal(boolean original) {
+    public void setOriginal(boolean original) // sets original property to argument
+    {
         this.original = original;
     }
-    public void setTeamColor(String teamColor) {
+    public void setTeamColor(String teamColor) // sets teamColor property to argument
+    {
         this.teamColor = teamColor;
     }
-    public void setSymbol(char symbol)
+    public void setSymbol(char symbol) // sets symbol property to argument
     {
         this.symbol = symbol;
     }
