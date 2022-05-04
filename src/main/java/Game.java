@@ -1,11 +1,11 @@
 import java.util.*;
 
-public class Game
+public abstract class Game
 {
-    private GameBoard board;
-    private Team teamOne;
-    private Team teamTwo;
-    private String turn;
+    protected GameBoard board;
+    protected Team teamOne;
+    protected Team teamTwo;
+    protected String turn;
 
     /**
      * Initializes the board with size numRows x numColumns and randomly places
@@ -104,6 +104,10 @@ public class Game
             turn = teamOne.getTeamColor();
         }
     }
+
+    public abstract boolean isAWinner();
+    public abstract Team getWinner();
+    public abstract boolean isGameEnded();
 
 
     /**Returns information (positions, names) about Pieces on the game board in a string format.
