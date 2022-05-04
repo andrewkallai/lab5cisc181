@@ -4,69 +4,93 @@ public class Rules
 {
     public static boolean checkValidAction(GameS22 game, int fromRow, int fromColumn, int toRow, int toColumn, char action)
     {
+        // Board setup
+        BoardSquare[][] squares = game.board.getSquares();
+        GameBoard board = game.board;
+
+        // Teams playing
+        Team currentTeam = game.getCurrentTeam();
+        Team enemyTeam = game.getOpponentTeam();
+
+        // Squares selected
+        BoardSquare fromSquare;
+        BoardSquare toSquare;
+        try {
+            fromSquare = squares[fromRow][fromColumn];
+            toSquare = squares[toRow][toColumn];
+        }
+        catch(Exception IndexOutOfBoundsException)
+        {
+            return false;
+        }
+
         // bool variable declarations
         boolean inBounds = false;
         boolean isFromSquareEmpty = false;
         boolean isToSquareEmpty = false;
         boolean isPieceOnCurrentTeam = false;
-        boolean validMove = false;
+        boolean isValidMove = false;
 
-        // default checks for booleans that must be true for a validMove regardless of the move
-        inBounds = game.board.inBounds(fromRow, fromColumn) && game.board.inBounds(toRow, toColumn);
-        isFromSquareEmpty = game.getBoardSquares()[fromRow][fromColumn].isEmpty();
+        // Conditions that MUST be true before checking anything else
+        inBounds = board.inBounds(fromRow, fromColumn) && board.inBounds(toRow, toColumn);
+        // Checking fromSquare
+        isFromSquareEmpty = fromSquare.isEmpty();
         if(!isFromSquareEmpty)
         {
-            isPieceOnCurrentTeam = game.getCurrentTeam().getTeamColor().equals(game.getBoardSquares()[fromRow][fromColumn].getPiece().getTeamColor());
+            isPieceOnCurrentTeam = fromSquare.getPiece().getTeamColor().equals(currentTeam.getTeamColor());
         }
 
-        // convenience check for a piece on the toSquare
-        isToSquareEmpty = game.getBoardSquares()[fromRow][fromColumn].isEmpty();
+        // Conditions that may NOT be required all the time
+        isToSquareEmpty = squares[toRow][toColumn].isEmpty();
 
+        // If all conditions check pass, check the action pass and go from there
         if(inBounds && !isFromSquareEmpty && isPieceOnCurrentTeam)
         {
             if(action == 'M')
             {
-                validMove = isToSquareEmpty;
+                isValidMove = isToSquareEmpty;
             }
             else if(action == 'S')
             {
-                if(!(game.getBoardSquares()[fromRow][fromColumn].getPiece() instanceof PieceBuzz)) // only runs if Piece on fromSquare is NOT a PieceBuzz
+                if(!(fromSquare.getPiece() instanceof PieceBuzz)) // only runs if Piece on fromSquare is NOT a PieceBuzz
                 {
-                    validMove = isToSquareEmpty;
+                    isValidMove = isToSquareEmpty;
                 }
             }
             else if(action == 'R')
             {
-                if(!(game.getBoardSquares()[fromRow][fromColumn].getPiece() instanceof PieceBuzz)) // only runs if Piece on fromSquare is NOT a PieceBuzz
+                if(!(fromSquare.getPiece() instanceof PieceBuzz) && !isToSquareEmpty) // only runs if Piece on fromSquare is NOT a PieceBuzz
                 {
-                    if(!isToSquareEmpty)
-                    {
-                        validMove = game.getOpponentTeam().getTeamColor().equals(game.getBoardSquares()[toRow][toColumn].getPiece().getTeamColor()); // valid if piece on toSquare is the enemy team
-                    }
+                    isValidMove = enemyTeam.getTeamColor().equals(toSquare.getPiece().getTeamColor()); // valid if piece on toSquare is the enemy team
                 }
             }
             else if(action == 'A')
             {
                 // only runs if Piece on fromSquare is NOT a PieceMinion AND the piece on the toSquare is on the enemy team
-                if(!(game.getBoardSquares()[fromRow][fromColumn].getPiece() instanceof PieceMinion) && game.getOpponentTeam().getTeamColor().equals(game.getBoardSquares()[toRow][toColumn].getPiece().getTeamColor()))
+                if(!(fromSquare.getPiece() instanceof PieceMinion))
                 {
-                    if(game.getBoardSquares()[fromRow][fromColumn].getPiece() instanceof PieceBuzz) // checks conditions if Piece is a PieceBuzz
+                    boolean toSquarePieceIsEnemy = enemyTeam.getTeamColor().equals(toSquare.getPiece().getTeamColor());
+                    if((fromSquare.getPiece() instanceof PieceBuzz) && toSquarePieceIsEnemy) // checks conditions if Piece is a PieceBuzz
                     {
-                        validMove = ((PieceBuzz) game.getBoardSquares()[fromRow][fromColumn].getPiece()).canAttack();
+                        isValidMove = ((PieceBuzz) fromSquare.getPiece()).canAttack(); // Buzz can only attack when his laser is working
                     }
-                    else if(game.getBoardSquares()[fromRow][fromColumn].getPiece() instanceof PieceEvilMinion)
+                    else if(fromSquare.getPiece() instanceof PieceEvilMinion)
                     {
-                        validMove = ((PieceEvilMinion) game.getBoardSquares()[fromRow][fromColumn].getPiece()).canAttack();
+                        isValidMove = ((PieceEvilMinion) fromSquare.getPiece()).canAttack(); // can attack any piece in hungry
+                    }
+                    else if((fromSquare.getPiece() instanceof PieceBlueHen))
+                    {
+                        isValidMove = toSquarePieceIsEnemy; // true if toSquare piece is enemy
                     }
                     else
                     {
-                        validMove = true; // for PieceBlueHen
+                        System.out.println("Something bad happened");
                     }
                 }
             }
         }
 
-        return validMove;
+        return isValidMove;
     }
 
     public static void main(String[] arg){
@@ -123,6 +147,10 @@ public class Rules
         // Test some moves that should be valid
         // Test some moves that are invalid
 
+        // BLUE TEAM TURN
+
+        System.out.println("testing blue team's MOVE");
+
         // This should be a valid move
         System.out.println(Rules.checkValidAction(game,
                 0,0,
@@ -137,14 +165,51 @@ public class Rules
                 2,0,
                 0,5,'M'));
 
+        System.out.println("testing blue team's SPAWN");
+
+        // This is a PieceBuzz - should not be a valid move
+        System.out.println(Rules.checkValidAction(game,
+                0,1,
+                0,5,'S'));
+
+        // toSquare is not empty - should not be a valid move
+        System.out.println(Rules.checkValidAction(game,
+                0,0,
+                0,3,'S'));
+
+        // fromSquare is not on the same team - should not be a valid move
+        System.out.println(Rules.checkValidAction(game,
+                2,0,
+                0,5,'S'));
+
+        // Should be able to spawn - should be valid move
+        System.out.println(Rules.checkValidAction(game,
+                0,0,
+                0,5,'S'));
+
+        System.out.println("Testing blue team's RECRUIT");
+
 
         // You can change the turn to test the other team pieces
         game.changeTurn();
 
+        System.out.println(game);
+
+        // RED TEAM TURN
+
+        // This should be a valid move
         System.out.println(Rules.checkValidAction(game,
                 2,0,
                 0,5,'M'));
 
+        // To Square isn't empty - should not be a valid move
+        System.out.println(Rules.checkValidAction(game,
+                0,0,
+                0,1,'M'));
+        // Wrong team - should not be a valid move
+        System.out.println(Rules.checkValidAction(game,
+                0,0,
+                1,4,'M'));
 
     }
 }
