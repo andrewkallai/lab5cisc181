@@ -4,14 +4,14 @@
  * <h3>University of Delaware</h3>
  * <p>
  *Creates a PieceBlueHen game piece for the game board. Extends the Piece.java class.
+ * Implements Recruiter and Attacker interfaces.
  * </p>
  *
  * @author Andrew Kallai
  * @author Leon Giang
  * @since 2022-04-5
  */
-public class PieceBlueHen extends Piece
-{
+public class PieceBlueHen extends Piece implements Attacker, Recruiter{
     private int numAttacks;
     private int numRecruits;
     private boolean flies;
@@ -31,18 +31,18 @@ public class PieceBlueHen extends Piece
         this.numRecruits = numRecruits;
         updateFly();
     }
-
+/*
     public int getNumAttacks(){
         return this.numAttacks;
     }
     public int getNumRecruits(){
         return this.numRecruits;
     }
-
+*/
     public boolean canFly()    {
         return this.flies;
     }
-
+/*
     public void setNumAttacks(int numAttacks)    {
         this.numAttacks = numAttacks;
         updateFly();
@@ -51,7 +51,7 @@ public class PieceBlueHen extends Piece
     public void setNumRecruits(int numRecruits)    {
         this.numRecruits = numRecruits;
     }
-
+*/
     private void updateFly(){
         if (this.numAttacks < MAX_NUM_ATTACKS){
             this.flies = true;
@@ -103,6 +103,56 @@ public class PieceBlueHen extends Piece
      * @return boolean
      */
     public boolean canSpawn(){
+        return true;
+    }
+
+    @Override
+    public int getNumAttacks(){
+        return this.numAttacks;
+    }
+    @Override
+    public void setNumAttacks(int attacks){
+        this.numAttacks = attacks;
+    }
+
+    /**
+     * Confirms if the attacking can be done.
+     * The first two parameters represent the row index and column index of the board square
+     * that contains the piece attacking.
+     * The next two parameters represent the row index and column index of the piece being attacked.
+     * @param rowIndex1: int
+     * @param columnIndex1: int
+     * @param rowIndex2: int
+     * @param columnIndex2: int
+     * @return boolean
+     */
+    @Override
+    public boolean validAttackPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
+        return true;
+    }
+
+    @Override
+    public int getNumRecruits() {
+        return this.numRecruits;
+    }
+    @Override
+    public void setNumRecruits(int recruits) {
+        this.numRecruits = recruits;
+    }
+
+    /**
+     * Confirms if the recruiting can be done.
+     * The first two parameters represent the row index and column index of the board square
+     * that contains the piece doing the recruiting.
+     * The next two parameters represent the row index and column index of the piece being recruited.
+     * @param rowIndex1: int
+     * @param columnIndex1: int
+     * @param rowIndex2: int
+     * @param columnIndex2: int
+     * @return boolean
+     */
+    @Override
+    public boolean validRecruitPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
         return true;
     }
 }

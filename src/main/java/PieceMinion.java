@@ -3,14 +3,14 @@
  * <h2>CISC181 181-080L Spring 2022</h2>
  * <h3>University of Delaware</h3>
  * <p>
- *Creates a PieceMinion game piece for the game board. Extends the Piece.java class.
+ *Creates a PieceMinion game piece for the game board. Extends the Piece.java class. Implements Recruiter interface.
  * </p>
  *
  * @author Andrew Kallai
  * @author Leon Giang
  * @since 2022-04-5
  */
-public class PieceMinion extends Piece{
+public class PieceMinion extends Piece implements Recruiter{
     protected int numRecruits;
     protected int numTimesSpawned;
 
@@ -31,19 +31,20 @@ public class PieceMinion extends Piece{
     public PieceMinion(){
         this(0,0);
     }
-
+/*
     public int getNumRecruits() {
         return numRecruits;
     }
+    */
     public int getNumTimesSpawned() {
         return numTimesSpawned;
     }
 
-
+/*
     public void setNumRecruits(int numRecruits) {
         this.numRecruits = numRecruits;
     }
-
+*/
     /**Prints out "Bello!"
      * Implementation of the abstract speak method in Piece.
      * @return void
@@ -87,6 +88,31 @@ public class PieceMinion extends Piece{
      */
     public boolean canSpawn(){
         return original && numTimesSpawned < MAX_NUM_SPAWNED;
+    }
+
+    @Override
+    public int getNumRecruits() {
+        return this.numRecruits;
+    }
+    @Override
+    public void setNumRecruits(int recruits) {
+        this.numRecruits = recruits;
+    }
+
+    /**
+     * Confirms if the recruiting can be done.
+     * The first two parameters represent the row index and column index of the board square
+     * that contains the piece doing the recruiting.
+     * The next two parameters represent the row index and column index of the piece being recruited.
+     * @param rowIndex1: int
+     * @param columnIndex1: int
+     * @param rowIndex2: int
+     * @param columnIndex2: int
+     * @return boolean
+     */
+    @Override
+    public boolean validRecruitPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
+        return true;
     }
 
 }
