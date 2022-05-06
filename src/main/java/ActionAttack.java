@@ -32,11 +32,11 @@ public class ActionAttack extends Action{
      */
     public void performAction(){
         Piece attacker = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
-        PieceEvilMinion evilPiece = (PieceEvilMinion) attacker;
+        //PieceEvilMinion evilPiece = (PieceEvilMinion) attacker;
         Piece attacked = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
-        PieceMinion minion = (PieceMinion) attacked;
-        if (attacker.getClass().equals(evilPiece.getClass()) && (attacked.getClass().equals(minion.getClass())
-                && attacker.getTeamColor().equals(attacked.getTeamColor()))){
+        //PieceMinion minion = (PieceMinion) attacked;
+        if ((attacker instanceof PieceEvilMinion) && (attacked instanceof PieceMinion) && attacker.getTeamColor().equals(attacked.getTeamColor()))
+        {
             //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
             attacker.speak();
             //Piece attackedPiece = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
@@ -48,7 +48,8 @@ public class ActionAttack extends Action{
             field.getCurrentTeam().addPieceToTeam(newEvilMinion);
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(newEvilMinion);
             field.changeTurn();
-        }else {
+        }
+        else {
             //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
             attacker.speak();
             //Piece attackedPiece = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
