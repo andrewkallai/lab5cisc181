@@ -74,6 +74,7 @@ public class Rules
         // If all conditions check pass, check the action pass and go from there
         if(!isFromSquareEmpty && isPieceOnCurrentTeam)
         {
+            System.out.println("Passed MUST HAVE conditions");
             /* finds what type the current Piece is */
             Piece fromPiece = fromSquare.getPiece();
             String currentPiece = "";
@@ -94,8 +95,13 @@ public class Rules
                 currentPiece = "PieceMinion";
             }
 
+            System.out.println("currentPiece: " + currentPiece);
+
             if(action == 'M')
             {
+                System.out.println("isToSquareEmpty " + isToSquareEmpty);
+                System.out.println("validMovePath" + ((PieceBlueHen) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn));
+
                 isValidMove = isToSquareEmpty && switch (currentPiece) {
                     case "PieceBuzz" -> ((PieceBuzz) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
                     case "PieceBlueHen" ->
@@ -140,7 +146,13 @@ public class Rules
                     isValidMove = ((PieceBlueHen) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn);
                 }
             }
+            else
+            {
+                System.out.println("Incorrect CHAR entered. Found : " + action);
+            }
         }
+
+        System.out.println("valid move: " + isValidMove);
 
         return isValidMove;
     }

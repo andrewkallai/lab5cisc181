@@ -98,25 +98,23 @@ public class Controller
     {
         char nextAction = ' ';
 
-        while(!game.isGameEnded()) {
-            while (!Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction)) {
+        while(!game.isGameEnded())
+        {
+            boolean validAction = false;
+            while (!validAction) {
                 textView.getPlayersNextAction(game); // TextView method
-                nextAction = textView.getActionType();
+                validAction = Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
+                if(!validAction)
+                {
+                    System.out.println("Invalid action entered");
+                }
             }
-
+            nextAction = textView.getActionType();
             carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
-            System.out.println(game);
+            textView.updateView(game);
         }
 
-        System.out.println("The game has ended!");
-        if(game.isAWinner())
-        {
-            System.out.println("The winning team is: " + game.getWinner().getTeamColor());
-        }
-        else
-        {
-            System.out.println("Nobody won!");
-        }
+        textView.printEndOfGameMessage(game);
     }
 
     public static void main(String args[])

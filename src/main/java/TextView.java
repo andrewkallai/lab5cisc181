@@ -120,13 +120,13 @@ public class TextView {
         Scanner scnr = new Scanner(System.in);
         actionType = getUsersNextActionType(scnr);
         System.out.println("Enter row index:");
-        rowIndexFromSquare = scnr.next().charAt(0);
+        rowIndexFromSquare = getValidInt(0, game.getGameBoard().getNumRows(), scnr);
         System.out.println("Enter column index:");
-        columnIndexFromSquare = scnr.next().charAt(0);
+        columnIndexFromSquare = getValidInt(0, game.getGameBoard().getNumColumns(), scnr);
         System.out.println("Enter row index:");
-        rowIndexToSquare = getValidInt(game.getGameBoard().getNumRows(), game.getGameBoard().getNumColumns(), scnr);
+        rowIndexToSquare = getValidInt(0, game.getGameBoard().getNumRows(), scnr);
         System.out.println("Enter column index:");
-        columnIndexToSquare = getValidInt(game.getGameBoard().getNumRows(), game.getGameBoard().getNumColumns(), scnr);
+        columnIndexToSquare = getValidInt(0, game.getGameBoard().getNumColumns(), scnr);
     }
 
     /**
@@ -134,7 +134,7 @@ public class TextView {
      * @param game: Game
      */
     public void updateView(Game game){
-        System.out.println(game.toString());
+        System.out.println(game);
     }
 
     /**
@@ -142,7 +142,15 @@ public class TextView {
      * @param game: Game
      */
     public void printEndOfGameMessage(Game game){
-        System.out.println("The game is over. The winner is: "+ game.getWinner());
+        System.out.println("The game has ended!");
+        if(game.isAWinner())
+        {
+            System.out.println("The winning team is: " + game.getWinner().getTeamColor());
+        }
+        else
+        {
+            System.out.println("Nobody won!");
+        }
     }
 
 }
