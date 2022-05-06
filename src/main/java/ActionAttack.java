@@ -12,12 +12,6 @@
  */
 public class ActionAttack extends Action
 {
-    private GameS22 field;
-    private int fromSquareRowIndex;
-    private int fromSquareColumnIndex;
-    private int toSquareRowIndex;
-    private int toSquareColumnIndex;
-
     ActionAttack(GameS22 field, int fromSquareRowIndex, int fromSquareColumnIndex, int toSquareRowIndex, int toSquareColumnIndex){
         super(field, fromSquareRowIndex, fromSquareColumnIndex, toSquareRowIndex, toSquareColumnIndex);
     }

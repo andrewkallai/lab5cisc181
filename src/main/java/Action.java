@@ -11,11 +11,11 @@
  * @since 2022-05-4
  */
 public abstract class Action {
-    private GameS22 field;
-    private int fromSquareRowIndex;
-    private int fromSquareColumnIndex;
-    private int toSquareRowIndex;
-    private int toSquareColumnIndex;
+    protected GameS22 field;
+    protected int fromSquareRowIndex;
+    protected int fromSquareColumnIndex;
+    protected int toSquareRowIndex;
+    protected int toSquareColumnIndex;
 
     public Action(GameS22 field, int fromSquareRowIndex, int fromSquareColumnIndex, int toSquareRowIndex, int toSquareColumnIndex){
         this.field = field;

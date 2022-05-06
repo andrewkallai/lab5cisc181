@@ -71,6 +71,7 @@ public class Controller
     {
         if(action == 'M')
         {
+            System.out.println("Init ActionMove");
             ActionMove move = new ActionMove(game, fromRow, fromColumn, toRow, toColumn);
             move.performAction();
         }
