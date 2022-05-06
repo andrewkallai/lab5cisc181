@@ -141,10 +141,6 @@ public class Rules
                     isValidMove = ((PieceBlueHen) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn);
                 }
             }
-            else
-            {
-                System.out.println("Incorrect CHAR entered. Found : " + action);
-            }
         }
 
         return isValidMove;
