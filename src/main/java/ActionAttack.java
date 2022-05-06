@@ -10,16 +10,17 @@
  * @author Leon Giang
  * @since 2022-05-5
  */
-public class ActionAttack extends Action{
-        private GameS22 field;
-        private int fromSquareRowIndex;
-        private int fromSquareColumnIndex;
-        private int toSquareRowIndex;
-        private int toSquareColumnIndex;
+public class ActionAttack extends Action
+{
+    private GameS22 field;
+    private int fromSquareRowIndex;
+    private int fromSquareColumnIndex;
+    private int toSquareRowIndex;
+    private int toSquareColumnIndex;
 
-        ActionAttack(GameS22 field, int fromSquareRowIndex, int fromSquareColumnIndex, int toSquareRowIndex, int toSquareColumnIndex){
-            super(field, fromSquareRowIndex, fromSquareColumnIndex, toSquareRowIndex, toSquareColumnIndex);
-        }
+    ActionAttack(GameS22 field, int fromSquareRowIndex, int fromSquareColumnIndex, int toSquareRowIndex, int toSquareColumnIndex){
+        super(field, fromSquareRowIndex, fromSquareColumnIndex, toSquareRowIndex, toSquareColumnIndex);
+    }
 
     /**
      * Calls an attacking Piece's speak method, removes the attacked Piece from the "to" square,

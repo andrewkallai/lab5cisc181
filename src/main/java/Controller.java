@@ -1,3 +1,16 @@
+/**
+ * <h1>Lab7</h1>
+ * <h2>CISC181 181-080L Spring 2022</h2>
+ * <h3>University of Delaware</h3>
+ * <p>
+ *     Creates the game controller, essentially the highest level file that will run the game.
+ * </p>
+ *
+ * @author Andrew Kallai
+ * @author Leon Giang
+ * @since 2022-05-4
+ */
+
 import java.util.ArrayList;
 
 public class Controller
@@ -5,6 +18,9 @@ public class Controller
     GameS22 game;
     TextView textView;
 
+    /**
+     * @return the full game setup with two teams of pieces
+     */
     public GameS22 setUpGameModel(){
         // Create 4 pieces for team A
         // Load the pieces in an ArrayList
@@ -36,6 +52,7 @@ public class Controller
         return new GameS22(8, 8,teamA, teamB);
     }
 
+    // default constructor
     public Controller()
     {
         game = setUpGameModel();
@@ -43,6 +60,13 @@ public class Controller
         textView.updateView(); // TextView method
     }
 
+    /**
+     * @param fromRow the row of the piece performing the action
+     * @param fromColumn the column of the piece performing the action
+     * @param toRow the row of the target/selected square
+     * @param toColumn the column of the target/selected square
+     * @param action the action the user wishes to perform
+     */
     private void carryOutAction(int fromRow, int fromColumn, int toRow, int toColumn, char action)
     {
         if(action == 'M')
@@ -67,12 +91,15 @@ public class Controller
         }
     }
 
+    /**
+     * Starts the game. Continuously asks for user input until the game ends.
+     */
     public void playGame()
     {
         char nextAction = ' ';
 
         while(!game.isGameEnded()) {
-            while (!Rules.checkValidAction(nextAction)) {
+            while (!Rules.checkValidAction(game, textView.getFromRow, textView.getFromColumn, textView.getToRow, textView.getToColumn, nextAction)) {
                 getNextPlayersAction(); // TextView method
                 nextAction = textView.getAction();
             }

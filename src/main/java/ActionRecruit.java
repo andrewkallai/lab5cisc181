@@ -10,7 +10,8 @@
  * @author Leon Giang
  * @since 2022-05-5
  */
-public class ActionRecruit extends Action{
+public class ActionRecruit extends Action
+{
     private GameS22 field;
     private int fromSquareRowIndex;
     private int fromSquareColumnIndex;

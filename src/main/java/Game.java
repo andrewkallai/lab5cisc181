@@ -1,3 +1,16 @@
+/**
+ * <h1>Lab7</h1>
+ * <h2>CISC181 181-080L Spring 2022</h2>
+ * <h3>University of Delaware</h3>
+ * <p>
+ *     Setup for the entire game
+ * </p>
+ *
+ * @author Andrew Kallai
+ * @author Leon Giang
+ * @since 2022-05-4
+ */
+
 import java.util.*;
 
 public abstract class Game
@@ -105,6 +118,7 @@ public abstract class Game
         }
     }
 
+    // Abstract method setup for determining the end-of-game behavior
     public abstract boolean isAWinner();
     public abstract Team getWinner();
     public abstract boolean isGameEnded();

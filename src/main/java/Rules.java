@@ -1,13 +1,29 @@
-import java.util.ArrayList;
-
-/*
-MISSING:
-The path between the To and From Square should be a valid
-path for moving this Piece (call the Piece’s validMovePath,
+/**
+ * <h1>Lab7</h1>
+ * <h2>CISC181 181-080L Spring 2022</h2>
+ * <h3>University of Delaware</h3>
+ * <p>
+ *     Establishes whether a move is valid based on the action, the squares selected, and the rules of the game
+ * </p>
+ *
+ * @author Andrew Kallai
+ * @author Leon Giang
+ * @since 2022-05-4
  */
+
+import java.util.ArrayList;
 
 public class Rules
 {
+    /**
+     * @param game The game being played
+     * @param fromRow the row of the piece performing the action
+     * @param fromColumn the column of the piece performing the action
+     * @param toRow the row of the target/selected square
+     * @param toColumn the column of the target/selected square
+     * @param action the action the user wishes to perform
+     * @return whether the action is a valid action
+     */
     public static boolean checkValidAction(GameS22 game, int fromRow, int fromColumn, int toRow, int toColumn, char action)
     {
         // checks if a piece is trying to attack itself, move to itself, recruit itself, or spawn itself.
@@ -27,6 +43,8 @@ public class Rules
         // Squares selected
         BoardSquare fromSquare;
         BoardSquare toSquare;
+        // Trys to access the fromSquare and toSquare. If it fails due to IndexOutOfBounds, return false since
+        // at least one of the points is out of bounds
         try {
             fromSquare = squares[fromRow][fromColumn];
             toSquare = squares[toRow][toColumn];
@@ -127,6 +145,7 @@ public class Rules
         return isValidMove;
     }
 
+    // Tests for checkValidAction
     public static void main(String[] arg){
         // Load the pieces in an ArrayList
         ArrayList<Piece> piecesTeamA = new ArrayList<>();
