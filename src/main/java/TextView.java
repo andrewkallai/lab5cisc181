@@ -31,7 +31,7 @@ public class TextView {
     public int getColumnIndexToSquare(){
         return columnIndexToSquare;
     }
-    public int getActionType(){
+    public char getActionType(){
         return actionType;
     }
 

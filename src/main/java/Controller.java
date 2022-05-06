@@ -57,7 +57,7 @@ public class Controller
     {
         game = setUpGameModel();
         textView = new TextView(); // constructor for TextView
-        textView.updateView(); // TextView method
+        textView.updateView(game); // TextView method
     }
 
     /**
@@ -99,12 +99,12 @@ public class Controller
         char nextAction = ' ';
 
         while(!game.isGameEnded()) {
-            while (!Rules.checkValidAction(game, textView.getFromRow, textView.getFromColumn, textView.getToRow, textView.getToColumn, nextAction)) {
-                getNextPlayersAction(); // TextView method
-                nextAction = textView.getAction();
+            while (!Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction)) {
+                textView.getPlayersNextAction(game); // TextView method
+                nextAction = textView.getActionType();
             }
 
-            carryOutAction(textView.getFromRow, textView.getFromColumn, textView.getToRow, textView.getToColumn, nextAction);
+            carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
             System.out.println(game);
         }
 
