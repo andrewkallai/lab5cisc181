@@ -103,13 +103,11 @@ public class Controller
             boolean validAction = false;
             while (!validAction) {
                 textView.getPlayersNextAction(game); // TextView method
+                nextAction = textView.getActionType();
                 validAction = Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
-                if(!validAction)
-                {
-                    System.out.println("Invalid action entered");
-                }
             }
             nextAction = textView.getActionType();
+            System.out.println("nextAction: " + nextAction);
             carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
             textView.updateView(game);
         }
