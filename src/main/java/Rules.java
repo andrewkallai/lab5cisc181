@@ -51,6 +51,7 @@ public class Rules
         }
         catch(Exception IndexOutOfBoundsException)
         {
+            System.out.println("Index entered is out of bounds");
             return false;
         }
 

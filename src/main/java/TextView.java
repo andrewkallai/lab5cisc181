@@ -75,7 +75,6 @@ public class TextView {
             }
         }
 
-        System.out.println("usermove : " + returnChar);
         return returnChar;
     }
 

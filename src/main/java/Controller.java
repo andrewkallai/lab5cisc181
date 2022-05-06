@@ -71,7 +71,6 @@ public class Controller
     {
         if(action == 'M')
         {
-            System.out.println("Init ActionMove");
             ActionMove move = new ActionMove(game, fromRow, fromColumn, toRow, toColumn);
             move.performAction();
         }
@@ -106,9 +105,13 @@ public class Controller
                 textView.getPlayersNextAction(game); // TextView method
                 nextAction = textView.getActionType();
                 validAction = Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
+                if(!validAction)
+                {
+                    System.out.println("Invalid action or squares entered");
+                }
             }
+
             nextAction = textView.getActionType();
-            System.out.println("nextAction: " + nextAction);
             carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
             textView.updateView(game);
         }
