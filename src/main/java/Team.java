@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 /**
  * <h1>Lab5</h1>
  * <h2>CISC181 181-080L Spring 2022</h2>
@@ -58,7 +59,10 @@ public class Team {
      * @return String
      */
     @Override
-    public String toString(){
+    public String toString()
+    {
+        Collections.sort(pieces);
+
         String holdString = "";
         for(int index = 0;index<this.pieces.size();index++){
             holdString = holdString + pieces.get(index).toString() + " ";

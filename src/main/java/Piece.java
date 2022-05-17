@@ -12,7 +12,9 @@
  *
  */
 
-public abstract class Piece
+import java.util.Collections;
+
+public abstract class Piece implements Comparable<Piece>
 {
     protected char symbol;
     protected String teamColor;
@@ -87,7 +89,14 @@ public abstract class Piece
      * @return String
      */
     @Override
-    public String toString(){
+    public String toString()
+    {
         return teamColor + " " + symbol;
+    }
+
+    @Override
+    public int compareTo(Piece other)
+    {
+        return Character.valueOf(symbol).compareTo(other.symbol);
     }
 }
