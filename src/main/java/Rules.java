@@ -15,6 +15,12 @@ import java.util.ArrayList;
 
 public class Rules
 {
+
+    private double distanceBetweenPoints(int x1, int y1, int x2, int y2)
+    {
+        return Math.sqrt(Math.pow(x2 - x1, 2.0) + Math.pow(y2 - y1, 2.0));
+    }
+
     /**
      * @param game The game being played
      * @param fromRow the row of the piece performing the action
@@ -109,7 +115,14 @@ public class Rules
             }
             else if(action == 'S' && !currentPiece.equals("PieceBuzz")) // PieceBuzz cannot spawn
             {
-                isValidMove = isToSquareEmpty;
+                if(currentPiece.equals("PieceMinion"))
+                {
+                    // TODO : IMPLEMENT PIECEMINION SPAWNPATH LATER
+                }
+                else
+                {
+                    isValidMove = isToSquareEmpty;
+                }
             }
             else if(action == 'R' && !currentPiece.equals("PieceBuzz")) // PieceBuzz cannot recruit
             {

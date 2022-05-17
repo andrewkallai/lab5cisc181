@@ -53,20 +53,6 @@ public class PieceMinion extends Piece implements Recruiter{
         System.out.println("Bello!");
     }
 
-    /**
-     * Confirms that the Piece has a valid path.
-     * @param fromSquareRow: int
-     * @param fromSquareCol: int
-     * @param toSquareRow: int
-     * @param toSquareCol: int
-     * @return boolean
-     */
-    public boolean validMovePath(int fromSquareRow, int fromSquareCol,
-                                 int toSquareRow, int toSquareCol) {
-        // You will implement this method in a later step
-        // each Piece will have a different valid path
-        return true;
-    }
 
     /**
      * Takes a PieceMinion and makes a copy of it: only hidden status, original status, numRecruits, and
@@ -100,18 +86,78 @@ public class PieceMinion extends Piece implements Recruiter{
     }
 
     /**
+     * Confirms that the Piece has a valid path.
+     * @param fromRow: int
+     * @param fromColumn: int
+     * @param toRow: int
+     * @param toColumn: int
+     * @return boolean
+     */
+    public boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Minion can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = true;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+        }
+
+        return validPath;
+    }
+
+    /**
      * Confirms if the recruiting can be done.
      * The first two parameters represent the row index and column index of the board square
      * that contains the piece doing the recruiting.
      * The next two parameters represent the row index and column index of the piece being recruited.
-     * @param rowIndex1: int
-     * @param columnIndex1: int
-     * @param rowIndex2: int
-     * @param columnIndex2: int
+     * @param fromRow: int
+     * @param fromColumn: int
+     * @param toRow: int
+     * @param toColumn: int
      * @return boolean
      */
     @Override
-    public boolean validRecruitPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
+    public boolean validRecruitPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Minion can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = true;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+        }
+
+        return validPath;
+    }
+
+    @Override
+    public boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
         return true;
     }
 

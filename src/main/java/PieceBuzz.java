@@ -67,21 +67,6 @@ public class PieceBuzz extends Piece implements Attacker{
     }
 
     /**
-     * Confirms that the Piece has a valid path.
-     * @param fromSquareRow: int
-     * @param fromSquareCol: int
-     * @param toSquareRow: int
-     * @param toSquareCol: int
-     * @return boolean
-     */
-    public boolean validMovePath(int fromSquareRow, int fromSquareCol,
-                                 int toSquareRow, int toSquareCol) {
-        // You will implement this method in a later step
-        // each Piece will have a different valid path
-        return true;
-    }
-
-    /**
      * Returns null to indicate that a PieceBuzz cannot be spawned.
      * Inherits features from spawn in Piece.
      * @return Piece
@@ -112,16 +97,55 @@ public class PieceBuzz extends Piece implements Attacker{
      * The first two parameters represent the row index and column index of the board square
      * that contains the piece attacking.
      * The next two parameters represent the row index and column index of the piece being attacked.
-     * @param rowIndex1: int
-     * @param columnIndex1: int
-     * @param rowIndex2: int
-     * @param columnIndex2: int
+     * @param fromRow: int
+     * @param fromColumn: int
+     * @param toRow: int
+     * @param toColumn: int
      * @return boolean
      */
     @Override
-    public boolean validAttackPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
-        return true;
+    public boolean validAttackPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Buzz can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = true;
+            }
+        }
+
+        return validPath;
     }
 
+    /**
+     * Confirms that the Piece has a valid path.
+     * @param fromRow: int
+     * @param fromColumn: int
+     * @param toRow: int
+     * @param toColumn: int
+     * @return boolean
+     */
+    public boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        return true; // Buzz can move anywhere on the board
+    }
+
+    @Override
+    public boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        return false; // Buzz can not spawn
+    }
 
 }

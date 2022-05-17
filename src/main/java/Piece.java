@@ -73,6 +73,15 @@ public abstract class Piece
      */
     public abstract Piece spawn();
 
+    /**
+     * @param fromRow row of the square containing the piece that is performing the action
+     * @param fromColumn column of the square that should contain the piece that is performing the action
+     * @param toRow row of the square the action should be performed on
+     * @param toColumn column of the square the action should be performed on
+     * @return whether the selected square and path are valid or not
+     */
+    public abstract boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn);
+
 
     /**Overrides toString method to return a piece's team color and symbol.
      * @return String

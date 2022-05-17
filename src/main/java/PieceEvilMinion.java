@@ -66,15 +66,6 @@ public class PieceEvilMinion extends PieceMinion implements Attacker, Recruiter{
     }
 
     /**
-     * Confirms that the Piece has a valid path.
-     * @return boolean
-     */
-    public boolean validMovePath()
-    {
-        return true;
-    }
-
-    /**
      * Returns a PieceEvilMinion with unique properties for numRecruits, numAttacks, numTimesSpawned, hidden,
      * and original.
      * Inherits features from spawn in Piece.
@@ -95,22 +86,6 @@ public class PieceEvilMinion extends PieceMinion implements Attacker, Recruiter{
         this.numAttacks = attacks;
     }
 
-    /**
-     * Confirms if the attacking can be done.
-     * The first two parameters represent the row index and column index of the board square
-     * that contains the piece attacking.
-     * The next two parameters represent the row index and column index of the piece being attacked.
-     * @param rowIndex1: int
-     * @param columnIndex1: int
-     * @param rowIndex2: int
-     * @param columnIndex2: int
-     * @return boolean
-     */
-    @Override
-    public boolean validAttackPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
-        return true;
-    }
-
     @Override
     public int getNumRecruits() {
         return this.numRecruits;
@@ -125,14 +100,124 @@ public class PieceEvilMinion extends PieceMinion implements Attacker, Recruiter{
      * The first two parameters represent the row index and column index of the board square
      * that contains the piece doing the recruiting.
      * The next two parameters represent the row index and column index of the piece being recruited.
-     * @param rowIndex1: int
-     * @param columnIndex1: int
-     * @param rowIndex2: int
-     * @param columnIndex2: int
+     * @param fromRow: int
+     * @param fromColumn: int
+     * @param toRow: int
+     * @param toColumn: int
      * @return boolean
      */
     @Override
-    public boolean validRecruitPath(int rowIndex1, int columnIndex1, int rowIndex2, int columnIndex2){
-        return true;
+    public boolean validRecruitPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Minion can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = true;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+        }
+
+        return validPath;
+    }
+
+
+    public boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Minion can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = true;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+        }
+
+        return validPath;
+    }
+
+    /**
+     * Confirms if the attacking can be done.
+     * The first two parameters represent the row index and column index of the board square
+     * that contains the piece attacking.
+     * The next two parameters represent the row index and column index of the piece being attacked.
+     * @param fromRow: int
+     * @param fromColumn: int
+     * @param toRow: int
+     * @param toColumn: int
+     * @return boolean
+     */
+    @Override
+    public boolean validAttackPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Minion can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = true;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+        }
+
+        return validPath;
+    }
+
+    @Override
+    public boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        boolean validPath = false;
+
+        // checks if both the row and column in the from and to square are different.
+        // If they are, it is not a valid path since Minion can only move row wise (any number) OR column wise (+- 2)
+        if(Math.abs(fromRow - toRow) > 0 && Math.abs(fromColumn - toColumn) > 0)
+        {
+            validPath = false;
+        }
+        else
+        {
+            if(Math.abs(fromRow - toRow) > 0)
+            {
+                validPath = true;
+            }
+            else if(Math.abs(fromColumn - toColumn) > 0 && fromRow == toRow)
+            {
+                validPath = toColumn == fromColumn + 2 || toColumn == fromColumn - 2;
+            }
+        }
+
+        return validPath;
     }
 }
