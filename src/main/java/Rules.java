@@ -123,6 +123,11 @@ public class Rules
                 {
                     // TODO : IMPLEMENT PIECEMINION SPAWNPATH LATER
                 }
+                //fix for lab 7
+                else if(currentPiece.equals("PieceEvilMinion"))
+                {
+                    isValidMove = ((PieceEvilMinion) fromPiece).canSpawn();
+                }
                 else
                 {
                     isValidMove = isToSquareEmpty;
