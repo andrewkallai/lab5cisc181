@@ -20,6 +20,7 @@ public abstract class Piece implements Comparable<Piece>
     protected String teamColor;
     protected boolean hidden ;
     protected boolean original;
+    protected boolean recruited;
 
     public Piece(char symbol, String teamColor, boolean hidden, boolean original){
         this.symbol = symbol;
@@ -45,6 +46,10 @@ public abstract class Piece implements Comparable<Piece>
     {
         return original;
     }
+    public boolean isRecruited()
+    {
+        return recruited;
+    }
 
     // Setters for all properties
     public void setHidden(boolean hidden) // sets hidden property to argument
@@ -62,6 +67,10 @@ public abstract class Piece implements Comparable<Piece>
     public void setSymbol(char symbol) // sets symbol property to argument
     {
         this.symbol = symbol;
+    }
+    public void setRecruited(boolean recruited)
+    {
+        this.recruited = recruited;
     }
 
     /**abstract method speak is to be implemented in another class

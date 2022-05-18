@@ -15,7 +15,7 @@ public class GameBoard
     private int numRows;
     private int numColumns;
     private BoardSquare[][] squares;
-    private BoardSquare blackHole;
+    private BoardSquare blackHole; // used to create a special BoardSquare. Behavior handled in BoardSquare class.
 
     public GameBoard(int numRows, int numColumns)
     {
@@ -75,10 +75,8 @@ public class GameBoard
             }
         }
 
-        //System.out.println("Finding a space for a blackhole");
         blackHole = findRandomEmptySpace();
         blackHole.setBlackHole(true);
-        //System.out.println("blackhole found: " + blackHole.isBlackHole());
     }
 
     /**
@@ -99,11 +97,6 @@ public class GameBoard
         System.out.println("DEBUG:\nFound empty space a row: " + row + " column: " + column);
         return squares[row][column];
     }
-
-//    public BoardSquare getBlackHole()
-//    {
-//        return this.blackHole;
-//    }
 
     /**
      * Returns the makeup of the game board in a string format.

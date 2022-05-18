@@ -16,6 +16,9 @@ public class GameS22 extends Game
     private int numTeamOnePieces = teamOne.getTeamPieces().size();
     private int numTeamTwoPieces = teamOne.getTeamPieces().size();
 
+    private int teamOneRecruitTarget = (int) (numTeamOnePieces * 0.7);
+    private int teamTwoRecruitTarget = (int) (numTeamTwoPieces * 0.7);
+
     public GameS22(int row, int column, Team teamOne, Team teamTwo)
     {
         super(row, column, teamOne, teamTwo);
@@ -73,8 +76,11 @@ public class GameS22 extends Game
     @Override
     public boolean isGameEnded()
     {
+        //System.out.println("DEBUG:\nteamOne captured pieces: " + teamOne.getNumPiecesCaptured() + " Needs: " + teamOneRecruitTarget + " to win.");
+        //System.out.println("DEBUG:\nteamTwo captured pieces: " + teamTwo.getNumPiecesCaptured() + " Needs: " + teamTwoRecruitTarget + " to win.");
+
         return teamOne.getTeamPieces().size() <= 0 || teamTwo.getTeamPieces().size() <= 0
-                || teamOne.getNumPiecesCaptured() > (int) (numTeamOnePieces * 0.7)
-                || teamTwo.getNumPiecesCaptured() > (int) (numTeamTwoPieces * 0.7);
+                || teamOne.getNumPiecesCaptured() > teamOneRecruitTarget
+                || teamTwo.getNumPiecesCaptured() > teamTwoRecruitTarget;
     }
 }

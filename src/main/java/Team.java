@@ -15,6 +15,7 @@ import java.util.Collections;
 public class Team {
     private String teamColor;
     private ArrayList<Piece> pieces;
+    private ArrayList<Piece> deadPieces = new ArrayList<Piece>();
     private int numPiecesCaptured = 0;
 
     // default constructor to create a team with a color and arraylist of pieces
@@ -35,6 +36,11 @@ public class Team {
         return this.pieces;
     }
 
+    public ArrayList<Piece> getDeadPieces()
+    {
+        return this.deadPieces;
+    }
+
     public int getNumPiecesCaptured()
     {
         return this.numPiecesCaptured;
@@ -47,6 +53,7 @@ public class Team {
      */
     public void removePieceFromTeam(Piece gamePiece)
     {
+        this.deadPieces.add(gamePiece);
         this.pieces.remove(gamePiece);
     }
 
@@ -57,7 +64,11 @@ public class Team {
      */
     public void recruitPieceFromTeam(Piece gamePiece)
     {
-        numPiecesCaptured++;
+        if(!gamePiece.isRecruited()) // only increment numPiecesCaptured if the piece has not been captured before. TODO : THIS NEEDS TO BE TESTED
+        {
+            numPiecesCaptured++;
+        }
+        gamePiece.setRecruited(true); // ensures that players can not keep re-recruiting the same piece to win the game
         this.pieces.remove(gamePiece);
     }
 
@@ -84,6 +95,14 @@ public class Team {
         for(int index = 0;index<this.pieces.size();index++){
             holdString = holdString + pieces.get(index).toString() + " ";
         }
-        return "Team " + this.teamColor + " Pieces :\n" + holdString;
+
+        // REGION // DEBUG STRING
+        String debug = "";
+        for(int index = 0;index<this.deadPieces.size();index++){
+            debug = debug + deadPieces.get(index).toString() + " ";
+        }
+        // END REGION
+
+        return "Team " + this.teamColor + " Pieces :\n" + holdString + "\nDEBUG\nTeam " + this.teamColor + " dead pieces :\n" + debug;
     }
 }

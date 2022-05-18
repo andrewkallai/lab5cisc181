@@ -21,10 +21,27 @@ public class ActionSpawn extends Action
      * sets that spawned Piece on the "to" board square, and changes the turn.
      */
     public void performAction(){
-        field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
-        Piece spawnedPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().spawn();
-        field.getCurrentTeam().addPieceToTeam(spawnedPiece);
-        field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(spawnedPiece);
-        field.changeTurn();
+
+        // REGION // REMOVES PIECE IF IT SPAWNS ON A BLACK HOLE
+        if(field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isBlackHole())
+        {
+            if(!field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isDiscovered())
+            {
+                field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setDiscovered(true);
+            }
+            System.out.println("You entered a black hole! You have lost your piece!");
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
+            field.changeTurn();
+        }
+        // END REGION
+        else
+        {
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
+            Piece spawnedPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().spawn();
+            field.getCurrentTeam().addPieceToTeam(spawnedPiece);
+            field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(spawnedPiece);
+            field.changeTurn();
+        }
     }
 }

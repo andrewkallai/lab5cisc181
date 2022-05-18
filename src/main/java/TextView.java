@@ -55,6 +55,7 @@ public class TextView {
             System.out.println("M (move)");
             System.out.println("R (recruit)");
             System.out.println("S (spawn)");
+            System.out.print(": ");
             if (scr.hasNext()) {
                 String usrInput = scr.next();
                 if ((usrInput.charAt(0) == 'A') || (usrInput.charAt(0) == 'a')) {
@@ -91,7 +92,8 @@ public class TextView {
         boolean validValue = false;
         int intValue;
         while (!validValue) {
-            System.out.println("Enter a valid integer between " + minNum +" and " + maxNum +" (inclusive).");
+            System.out.println("Your integer must be between " + minNum +" and " + maxNum +" (inclusive).");
+            System.out.print(": ");
             if (scr.hasNextInt()) {
                 intValue = scr.nextInt();
                 if (minNum <= intValue && intValue <= maxNum) {
@@ -120,13 +122,17 @@ public class TextView {
     public void getPlayersNextAction(GameS22 game){
         Scanner scnr = new Scanner(System.in);
         actionType = getUsersNextActionType(scnr);
-        System.out.println("Enter row index:");
+
+        System.out.println("Where is the piece that you want to perform the action?");
+        System.out.println("Enter row index");
         rowIndexFromSquare = getValidInt(0, game.getGameBoard().getNumRows(), scnr);
-        System.out.println("Enter column index:");
+        System.out.println("Enter column index");
         columnIndexFromSquare = getValidInt(0, game.getGameBoard().getNumColumns(), scnr);
-        System.out.println("Enter row index:");
+
+        System.out.println("Where is your target square?");
+        System.out.println("Enter row index");
         rowIndexToSquare = getValidInt(0, game.getGameBoard().getNumRows(), scnr);
-        System.out.println("Enter column index:");
+        System.out.println("Enter column index");
         columnIndexToSquare = getValidInt(0, game.getGameBoard().getNumColumns(), scnr);
     }
 

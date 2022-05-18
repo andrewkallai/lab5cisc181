@@ -29,7 +29,7 @@ public class Controller
                 0,0,false,true));
         piecesTeamA.add(new PieceBuzz('B',"Blu",2,1,
                 true,false,true));
-        piecesTeamA.add(new PieceBlueHen('H',"Blu",3,
+        piecesTeamA.add(new PieceBlueHen('H',"Blu",0,
                 9,false,true));
         piecesTeamA.add(new PieceEvilMinion('E',"Blu",1,
                 1,4,false, true));
@@ -88,6 +88,10 @@ public class Controller
         {
             ActionSpawn spawn = new ActionSpawn(game, fromRow, fromColumn, toRow, toColumn);
             spawn.performAction();
+        }
+        else if(action == 'G')
+        {
+            // TODO : IMPLEMENT REVIVE ACTION
         }
     }
 
