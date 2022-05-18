@@ -154,8 +154,14 @@ public class Rules
                 }
                 else if(currentPiece.equals("PieceEvilMinion"))
                 {
-                    // valid on any Piece as long as PieceEvilMinion is hungry (canAttack) AND the movePath is valid
-                    isValidMove = ((PieceEvilMinion) fromPiece).canAttack() && ((PieceEvilMinion) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn); // can attack any piece in hungry
+                    if(toSquarePieceIsEnemy) {
+                        // valid on any Piece as long as PieceEvilMinion is hungry (canAttack) AND the movePath is valid
+                        isValidMove = ((PieceEvilMinion) fromPiece).canAttack() && ((PieceEvilMinion) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn); // can attack any piece in hungry
+                    }
+                    else
+                    {
+                        isValidMove = ((PieceEvilMinion) fromPiece).canAttack() && ((PieceEvilMinion) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn) && (toSquare.getPiece() instanceof PieceMinion);
+                    }
                 }
                 else if(currentPiece.equals("PieceBlueHen") && toSquarePieceIsEnemy)
                 {
