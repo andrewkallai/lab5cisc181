@@ -21,10 +21,26 @@ public class ActionMove extends Action
      * sets that Piece on the "to" board square, and changes the turn.
      */
     public void performAction(){
-        field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
-        Piece movingPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
-        field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
-        field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(movingPiece);
-        field.changeTurn();
+        // REGION - removes piece if it lands on the black hole
+        if(field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isBlackHole())
+        {
+            if(!field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isDiscovered())
+            {
+                field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setDiscovered(true);
+            }
+            System.out.println("You entered a black hole! You have lost your piece!");
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
+            field.changeTurn();
+        }
+        // END REGION
+        else
+        {
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
+            Piece movingPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
+            field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(movingPiece);
+            field.changeTurn();
+        }
     }
 }

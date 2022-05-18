@@ -15,6 +15,7 @@ public class GameBoard
     private int numRows;
     private int numColumns;
     private BoardSquare[][] squares;
+    private BoardSquare blackHole;
 
     public GameBoard(int numRows, int numColumns)
     {
@@ -73,6 +74,11 @@ public class GameBoard
                 squares[row][column] = new BoardSquare(color);
             }
         }
+
+        //System.out.println("Finding a space for a blackhole");
+        blackHole = findRandomEmptySpace();
+        blackHole.setBlackHole(true);
+        //System.out.println("blackhole found: " + blackHole.isBlackHole());
     }
 
     /**
@@ -90,9 +96,14 @@ public class GameBoard
             column = (int)(Math.random() * numColumns);
         }
 
+        System.out.println("DEBUG:\nFound empty space a row: " + row + " column: " + column);
         return squares[row][column];
     }
 
+//    public BoardSquare getBlackHole()
+//    {
+//        return this.blackHole;
+//    }
 
     /**
      * Returns the makeup of the game board in a string format.

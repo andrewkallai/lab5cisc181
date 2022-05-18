@@ -64,6 +64,7 @@ public class Rules
         // bool variable declarations
         boolean isFromSquareEmpty = false;
         boolean isToSquareEmpty = false;
+//        boolean isToSquareBlackHole = false;
         boolean isPieceOnCurrentTeam = false;
         boolean isValidMove = false;
 
@@ -77,6 +78,9 @@ public class Rules
 
         // Conditions that may NOT be required all the time
         isToSquareEmpty = squares[toRow][toColumn].isEmpty();
+
+        // NEW square behavior
+//        isToSquareBlackHole = toSquare.isBlackHole();
 
         // If all conditions check pass, check the action pass and go from there
         if(!isFromSquareEmpty && isPieceOnCurrentTeam)

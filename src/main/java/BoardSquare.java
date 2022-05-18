@@ -13,6 +13,12 @@
 public class BoardSquare
 {
     private boolean isEmpty;
+
+    // REGION
+    // black hole variables
+    private boolean isBlackHole;
+    private boolean isDiscovered;
+    // ENDREGION
     private Piece representPiece;
     private String color;
 
@@ -20,6 +26,8 @@ public class BoardSquare
     public BoardSquare(String color){
         this.color = color;
         isEmpty = true;
+        isBlackHole = false;
+        isDiscovered = false;
     }
 
     // Getters
@@ -33,6 +41,18 @@ public class BoardSquare
         return this.color;
     }
 
+    // REGION
+    // black hole methods
+    public boolean isBlackHole()
+    {
+        return this.isBlackHole;
+    }
+    public boolean isDiscovered()
+    {
+        return this.isDiscovered;
+    }
+    // END REGION
+
     /**
      * Puts the piece given in the argument on a square.
      * @param gamePiece Game Piece to place on board square
@@ -41,6 +61,19 @@ public class BoardSquare
         representPiece = gamePiece;
         isEmpty = false;
     }
+
+    // REGION
+    // black hole methods
+    public void setBlackHole(boolean isBlackHole)
+    {
+        this.isBlackHole = isBlackHole;
+    }
+
+    public void setDiscovered(boolean discovered)
+    {
+        this.isDiscovered = discovered;
+    }
+    // END REGION
 
     /**
      * Removes a Piece from the board square.
@@ -59,7 +92,11 @@ public class BoardSquare
      */
     @Override
     public String toString(){
-        if (representPiece == null){
+        if(isBlackHole && isDiscovered) // prints black hole when discovered (piece lands on square)
+        {
+            return "~~~O~~~";
+        }
+        else if (representPiece == null){
             return "-------";
         }
         else{
