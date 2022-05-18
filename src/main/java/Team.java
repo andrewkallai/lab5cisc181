@@ -15,6 +15,7 @@ import java.util.Collections;
 public class Team {
     private String teamColor;
     private ArrayList<Piece> pieces;
+    private int numPiecesCaptured = 0;
 
     // default constructor to create a team with a color and arraylist of pieces
     public Team(String teamColor, ArrayList<Piece> pieces)
@@ -34,13 +35,29 @@ public class Team {
         return this.pieces;
     }
 
+    public int getNumPiecesCaptured()
+    {
+        return this.numPiecesCaptured;
+    }
+
     /**
-     * Removes a Piece from the array of Pieces held by a team.
+     * Removes a Piece from the array of Pieces held by a team. Used for attacks.
      * @param gamePiece to remove from a team
      * @return void
      */
     public void removePieceFromTeam(Piece gamePiece)
     {
+        this.pieces.remove(gamePiece);
+    }
+
+    /**
+     * Removes a Piece from the array of Pieces held by a team. Used for recruiting.
+     * @param gamePiece to remove from a team
+     * @return void
+     */
+    public void recruitPieceFromTeam(Piece gamePiece)
+    {
+        numPiecesCaptured++;
         this.pieces.remove(gamePiece);
     }
 

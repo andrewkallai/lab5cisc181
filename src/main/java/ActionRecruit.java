@@ -23,7 +23,7 @@ public class ActionRecruit extends Action
     public void performAction(){
         field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
         Piece recruitedPiece = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
-        field.getOpponentTeam().removePieceFromTeam(recruitedPiece);
+        field.getOpponentTeam().recruitPieceFromTeam(recruitedPiece);
         field.getCurrentTeam().addPieceToTeam(recruitedPiece);
         field.changeTurn();
     }

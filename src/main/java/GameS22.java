@@ -13,6 +13,9 @@
 
 public class GameS22 extends Game
 {
+    private int numTeamOnePieces = teamOne.getTeamPieces().size();
+    private int numTeamTwoPieces = teamOne.getTeamPieces().size();
+
     public GameS22(int row, int column, Team teamOne, Team teamTwo)
     {
         super(row, column, teamOne, teamTwo);
@@ -43,6 +46,14 @@ public class GameS22 extends Game
             {
                 winner = teamTwo;
             }
+            else if(teamOne.getNumPiecesCaptured() > (int) (numTeamOnePieces * 0.7))
+            {
+                winner = teamOne;
+            }
+            else if(teamTwo.getNumPiecesCaptured() > (int) (numTeamTwoPieces * 0.7))
+            {
+                winner = teamTwo;
+            }
             else
             {
                 winner = null;
@@ -62,12 +73,8 @@ public class GameS22 extends Game
     @Override
     public boolean isGameEnded()
     {
-        boolean gameOver = false;
-        if(teamOne.getTeamPieces().size() <= 0 || teamTwo.getTeamPieces().size() <= 0)
-        {
-            gameOver = true;
-        }
-
-        return gameOver;
+        return teamOne.getTeamPieces().size() <= 0 || teamTwo.getTeamPieces().size() <= 0
+                || teamOne.getNumPiecesCaptured() > (int) (numTeamOnePieces * 0.7)
+                || teamTwo.getNumPiecesCaptured() > (int) (numTeamTwoPieces * 0.7);
     }
 }
