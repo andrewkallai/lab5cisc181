@@ -105,6 +105,7 @@ public class Rules
                 currentPiece = "PieceMinion";
             }
 
+            //if(action == 'M' && currentPiece.equals(""))
             if(action == 'M')
             {
                 isValidMove = isToSquareEmpty && switch (currentPiece) {
@@ -114,6 +115,7 @@ public class Rules
                     case "PieceEvilMinion" ->
                             ((PieceEvilMinion) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
                     case "PieceMinion" -> ((PieceMinion) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
+                    // case "PieceAbominableSnowman" -> ((PieceAbominableSnowman) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
                     default -> false;
                 };
             }
