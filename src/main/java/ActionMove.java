@@ -28,8 +28,11 @@ public class ActionMove extends Action
             {
                 field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setDiscovered(true);
             }
+
+            Piece mover = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
+            mover.speak();
             System.out.println("You entered a black hole! You have lost your piece!");
-            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
+            field.getCurrentTeam().removePieceFromTeam(mover);
             field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
             field.changeTurn();
         }

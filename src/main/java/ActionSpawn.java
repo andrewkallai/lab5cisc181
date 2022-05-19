@@ -29,9 +29,8 @@ public class ActionSpawn extends Action
             {
                 field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setDiscovered(true);
             }
-            System.out.println("You entered a black hole! You have lost your piece!");
             field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
-            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
+            System.out.println("You entered a black hole! You have lost your spawned piece!");
             field.changeTurn();
         }
         // END REGION

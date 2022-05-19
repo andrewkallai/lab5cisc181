@@ -93,6 +93,10 @@ public abstract class Piece implements Comparable<Piece>
      */
     public abstract boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn);
 
+    public abstract boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn);
+
+    public abstract boolean canSpawn();
+
 
     /**Overrides toString method to return a piece's team color and symbol.
      * @return String
