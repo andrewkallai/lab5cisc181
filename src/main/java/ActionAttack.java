@@ -25,11 +25,12 @@ public class ActionAttack extends Action
      * remove the attacked Piece from the current team, create a new Evil Minion Piece, add the new piece to current team
      * place the new piece on the board where the Minion was, and change the turn.
      */
-    public void performAction(){
+    public void performAction() {
         Piece attacker = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
         //PieceEvilMinion evilPiece = (PieceEvilMinion) attacker;
         Piece attacked = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
         //PieceMinion minion = (PieceMinion) attacked;
+
         if ((attacker instanceof PieceEvilMinion) && (attacked instanceof PieceMinion) && attacker.getTeamColor().equals(attacked.getTeamColor()))
         {
             //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
@@ -45,6 +46,9 @@ public class ActionAttack extends Action
             field.changeTurn();
         }
         else {
+            if (attacker instanceof PieceAbominableSnowman) {
+                ((PieceAbominableSnowman) attacker).decreaseMass();
+            }
             //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
             attacker.speak();
             //Piece attackedPiece = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
@@ -53,6 +57,10 @@ public class ActionAttack extends Action
             //Piece attackingPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
             field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(attacker);
+            if (((PieceAbominableSnowman) attacker).getMass() == 0) {
+                field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
+                //field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece (movingPiece);
+            }
             field.changeTurn();
         }
     }

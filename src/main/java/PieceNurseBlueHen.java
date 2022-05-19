@@ -10,7 +10,7 @@
  * @author Leon Giang
  * @since 2022-05-18
  */
-public class PieceNurseBlueHen extends PieceBlueHen implements Reviver
+public class PieceNurseBlueHen extends PieceBlueHen
 {   private int numRevives;
 
     public PieceNurseBlueHen(int numRevives)
@@ -25,11 +25,11 @@ public class PieceNurseBlueHen extends PieceBlueHen implements Reviver
         this.numRevives = numRevives;
     }
 
-    @Override
+
     public int getNumRevives() {
         return this.numRevives;
     }
-    @Override
+
     public void setNumRevives(int recruits) {
         this.numRevives = recruits;
     }
@@ -42,7 +42,6 @@ public class PieceNurseBlueHen extends PieceBlueHen implements Reviver
      * @param toColumn: int
      * @return boolean
      */
-    @Override
     public boolean validRevivePath(int fromRow, int fromColumn, int toRow, int toColumn) {
         boolean validMove = false;
         if(canFly())
