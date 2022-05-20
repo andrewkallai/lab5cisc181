@@ -42,5 +42,12 @@ public class ActionSpawn extends Action
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(spawnedPiece);
             field.changeTurn();
         }
+
+        if(field.getSkipTurn() == 1)
+        {
+            field.setSkipTurn(0);
+            System.out.println("Your previous action was a revive. Your turn will be skipped!");
+            field.changeTurn();
+        }
     }
 }

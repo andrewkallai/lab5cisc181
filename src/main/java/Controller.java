@@ -12,6 +12,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Controller
 {
@@ -33,6 +34,7 @@ public class Controller
                 9,false,true));
         piecesTeamA.add(new PieceEvilMinion('E',"Blu",1,
                 1,4,false, true));
+        piecesTeamA.add(new PieceNurseBlueHen('N',"Blu", false, true, 0));
         // Create a team object
         Team teamA = new Team("Blu",piecesTeamA);
         // Create 4 pieces for team B
@@ -46,6 +48,7 @@ public class Controller
                 true,false,true));
         piecesTeamB.add(new PieceEvilMinion('E',"Red",1,
                 1,4,false, true));
+        piecesTeamB.add(new PieceNurseBlueHen('N',"Red", false, true, 0));
         // Create a team object
         Team teamB = new Team("Red",piecesTeamB);
         // Create an instance of the game
@@ -89,10 +92,14 @@ public class Controller
             ActionSpawn spawn = new ActionSpawn(game, fromRow, fromColumn, toRow, toColumn);
             spawn.performAction();
         }
-        else if(action == 'G')
-        {
-            // TODO : IMPLEMENT REVIVE ACTION
-        }
+
+    }
+
+    private void carryOutAction(int fromRow, int fromColumn, int toRow, int toColumn, String piece, ArrayList<String> allowedRevives, ArrayList<Piece> deadPieces)
+    {
+        int pieceIndex = allowedRevives.indexOf(piece);
+        ActionRevive revive = new ActionRevive(game, fromRow, fromColumn, toRow, toColumn, deadPieces.get(pieceIndex));
+        revive.performAction();
     }
 
     /**
@@ -101,22 +108,81 @@ public class Controller
     public void playGame()
     {
         char nextAction = ' ';
+        String piece;
 
         while(!game.isGameEnded())
         {
+            String pieceToRevive = "NULL";
+            ArrayList<Piece> deadPieces = new ArrayList<>();
+            ArrayList<String> allowedRevives = new ArrayList<>();
             boolean validAction = false;
             while (!validAction) {
                 textView.getPlayersNextAction(game); // TextView method
                 nextAction = textView.getActionType();
-                validAction = Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
+                if(nextAction == 'G')
+                {
+                    Scanner scan = new Scanner(System.in);
+
+                    System.out.println("Please enter the piece you would like to revive.");
+                    deadPieces = game.getCurrentTeam().getDeadPieces();
+                    allowedRevives = new ArrayList<>();
+                    for(int i = 0; i < deadPieces.size(); i++)
+                    {
+                        if(deadPieces.get(i) instanceof PieceAbominableSnowman)
+                        {
+                            allowedRevives.add("snowman");
+                        }
+                        else if(deadPieces.get(i) instanceof PieceBlueHen)
+                        {
+                            allowedRevives.add("bluehen");
+                        }
+                        else if(deadPieces.get(i) instanceof PieceBuzz)
+                        {
+                            allowedRevives.add("buzz");
+                        }
+                        else if(deadPieces.get(i) instanceof PieceEvilMinion)
+                        {
+                            allowedRevives.add("evilminion");
+                        }
+                        else if(deadPieces.get(i) instanceof PieceMinion)
+                        {
+                            allowedRevives.add("minion");
+                        }
+                        else if(deadPieces.get(i) instanceof PieceNurseBlueHen)
+                        {
+                            allowedRevives.add("nurse");
+                        }
+                    }
+                    // REGION // DEBUG STRING
+                    String listPieces = "";
+                    for(int index = 0;index<allowedRevives.size();index++){
+                        listPieces = listPieces + allowedRevives.get(index) + " ";
+                    }
+                    // END REGION
+                    System.out.println("Your current dead pieces are: " + listPieces);
+                    System.out.print(": ");
+
+                    pieceToRevive = scan.next();
+
+                    validAction = allowedRevives.contains(pieceToRevive);
+                }
+                else {
+                    validAction = Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
+                }
                 if(!validAction)
                 {
                     System.out.println("Invalid action or squares entered");
+                    pieceToRevive = "NULL";
                 }
             }
-
             nextAction = textView.getActionType();
-            carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
+            if(!pieceToRevive.equals("NULL"))
+            {
+                carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), pieceToRevive, allowedRevives, deadPieces);
+            }
+            else {
+                carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
+            }
             textView.updateView(game);
         }
 

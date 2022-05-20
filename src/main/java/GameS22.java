@@ -19,6 +19,8 @@ public class GameS22 extends Game
     private int teamOneRecruitTarget = (int) (numTeamOnePieces * 0.7);
     private int teamTwoRecruitTarget = (int) (numTeamTwoPieces * 0.7);
 
+    private int skipTurn = 0;
+
     public GameS22(int row, int column, Team teamOne, Team teamTwo)
     {
         super(row, column, teamOne, teamTwo);
@@ -30,6 +32,16 @@ public class GameS22 extends Game
     @Override
     public boolean isAWinner() {
         return getWinner() != null;
+    }
+
+    public void setSkipTurn(int skipTurn)
+    {
+        this.skipTurn = skipTurn;
+    }
+
+    public int getSkipTurn()
+    {
+        return this.skipTurn;
     }
 
     /**

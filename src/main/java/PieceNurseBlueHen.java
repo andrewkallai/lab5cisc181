@@ -11,13 +11,8 @@
  * @since 2022-05-18
  */
 public class PieceNurseBlueHen extends PieceBlueHen
-{   private int numRevives;
-
-    public PieceNurseBlueHen(int numRevives)
-    {
-        super(0, 0);
-        this.numRevives = numRevives;
-    }
+{
+    private int numRevives;
 
     public PieceNurseBlueHen(char symbol, String teamColor, boolean hidden, boolean original, int numRevives)
     {
@@ -25,6 +20,11 @@ public class PieceNurseBlueHen extends PieceBlueHen
         this.numRevives = numRevives;
     }
 
+    public PieceNurseBlueHen(int numRevives)
+    {
+        super(0, 0);
+        this.numRevives = numRevives;
+    }
 
     public int getNumRevives() {
         return this.numRevives;
@@ -117,5 +117,11 @@ public class PieceNurseBlueHen extends PieceBlueHen
         }
 
         return validMove;
+    }
+
+    @Override
+    public boolean canSpawn()
+    {
+        return false;
     }
 }

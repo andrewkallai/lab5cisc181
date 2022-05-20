@@ -16,9 +16,28 @@ import java.util.ArrayList;
 public class Rules
 {
 
-    private double distanceBetweenPoints(int x1, int y1, int x2, int y2)
+    private static double distanceBetweenPoints(int x1, int y1, int x2, int y2)
     {
         return Math.sqrt(Math.pow(x2 - x1, 2.0) + Math.pow(y2 - y1, 2.0));
+    }
+
+    public static int getCornerIndex(double[][] nearestCorners)
+    {
+        int index = -1;
+        double min = 999;
+        for(int i = 0; i < nearestCorners.length; i++)
+        {
+            if(nearestCorners[i][0] != -1.0 && nearestCorners[i][1] < min)
+            {
+                min = nearestCorners[i][1];
+                index = i;
+            }
+        }
+        if(index != -1) {
+            nearestCorners[index][0] = -1;
+        }
+
+        return (int)index;
     }
 
     /**
@@ -49,6 +68,11 @@ public class Rules
         // Squares selected
         BoardSquare fromSquare;
         BoardSquare toSquare;
+
+        // reference for max number of rows and columns
+        int numRows = game.getGameBoard().getNumRows();
+        int numColumns = game.getGameBoard().getNumColumns();
+
         // Trys to access the fromSquare and toSquare. If it fails due to IndexOutOfBounds, return false since
         // at least one of the points is out of bounds
         try {
@@ -92,6 +116,10 @@ public class Rules
             {
                 currentPiece = "PieceBuzz";
             }
+            else if(fromPiece instanceof PieceNurseBlueHen)
+            {
+                currentPiece = "PieceMinion";
+            }
             else if(fromPiece instanceof PieceBlueHen)
             {
                 currentPiece = "PieceBlueHen";
@@ -103,6 +131,10 @@ public class Rules
             else if(fromPiece instanceof PieceMinion)
             {
                 currentPiece = "PieceMinion";
+            }
+            else if(fromPiece instanceof PieceAbominableSnowman)
+            {
+                currentPiece = "PieceAbominableSnowman";
             }
 
             //if(action == 'M' && currentPiece.equals(""))
@@ -123,7 +155,50 @@ public class Rules
             {
                 if(currentPiece.equals("PieceMinion"))
                 {
-                    // TODO : IMPLEMENT PIECEMINION SPAWNPATH LATER
+                    // create a 2d array holding the coordinates for the corners of the board
+                    int[][] corners = {{0, 0}, {0, numColumns-1}, {numRows-1, 0}, {numRows-1, numColumns-1}};
+
+                    // create an array that holds the distance between the fromSquare and the corners
+                    double[] distances = new double[4];
+                    for(int i = 0; i < 4; i++)
+                    {
+                        distances[i] = distanceBetweenPoints(fromRow,fromColumn, corners[i][0], corners[i][1]);
+                    }
+
+                    // Creates another 2d array that will hold the distances as well as the index of the corner coordinates that produced that result
+                    double[][] nearestCorners = new double[4][2];
+                    for(int i = 0; i < distances.length; i++)
+                    {
+                        nearestCorners[i][0] = i;
+                        nearestCorners[i][1] = distances[i];
+                    }
+
+                    // Looks for the index of the nearest empty corner. If there are no empty corners, returns -1.
+                    int closestEmptyCornerIndex = -1;
+                    int check = -1;
+                    while(check == -1)
+                    {
+                        closestEmptyCornerIndex = getCornerIndex(nearestCorners);
+                        if(closestEmptyCornerIndex == -1)
+                        {
+                            check = 0;
+                        }
+                        else {
+                            check = squares[corners[closestEmptyCornerIndex][0]][corners[closestEmptyCornerIndex][1]].isEmpty() ? 0 : -1;
+                        }
+                    }
+
+                    //System.out.println("DEBUG:\nIndex of closest empty corner: " + closestEmptyCornerIndex);
+
+                    // If the returned index of the nearest corner is -1, means there are no empty corners and PieceMinion cannot spawn
+                    // else, checks if the toSquare coordinates match that of the nearest empty corner.
+                    if(closestEmptyCornerIndex == -1)
+                    {
+                        isValidMove = false;
+                    }
+                    else {
+                        isValidMove = toRow == corners[closestEmptyCornerIndex][0] && toColumn == corners[closestEmptyCornerIndex][1];
+                    }
                 }
                 //fix for lab 7
                 else if(currentPiece.equals("PieceEvilMinion"))
@@ -170,6 +245,10 @@ public class Rules
                     // valid if target is an enemy AND the movePath is valid
                     isValidMove = ((PieceBlueHen) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn);
                 }
+            }
+            else if(action == 'G' && currentPiece.equals("PieceNurseBlueHen"))
+            {
+                isValidMove = toSquare.isEmpty();
             }
         }
 
