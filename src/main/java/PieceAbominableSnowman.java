@@ -8,7 +8,7 @@
  *
  * @author Andrew Kallai
  * @author Leon Giang
- * @since 2022-04-5
+ * @since 2022-05-19
  */
 public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter{
     private int numAttacks;
@@ -59,6 +59,7 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
      * Implementation of abstract speak method in Piece.
      * @return void
      */
+    @Override
     public void speak(){
         System.out.println("RAAAAWWWWR!");
     }
@@ -69,15 +70,21 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
      * Inherits features from spawn in Piece.
      * @return PieceBlueHen
      */
+    @Override
     public PieceAbominableSnowman spawn()
     {
         PieceAbominableSnowman makeSnowman =
                 new PieceAbominableSnowman(Character.toLowerCase(this.symbol),
                         this.teamColor,this.numAttacks,this.numRecruits,
-                        false,false, 80);//add things inside
+                        false,false, 80);
         return makeSnowman;
     }
 
+
+    /**
+     * Confirms that the Piece can spawn.
+     * @return boolean
+     */
     @Override
     public boolean canSpawn()
     {
@@ -115,6 +122,7 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
      * @param toColumn: int
      * @return boolean
      */
+    @Override
     public boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
         boolean validMove = false;

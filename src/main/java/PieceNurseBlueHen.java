@@ -3,7 +3,7 @@
  * <h2>CISC181 181-080L Spring 2022</h2>
  * <h3>University of Delaware</h3>
  * <p>
- *Creates a PieceNurseBlueHen game piece for the game board. Implements the Reviver interface.
+ *Creates a PieceNurseBlueHen game piece for the game board.
  * </p>
  *
  * @author Andrew Kallai
@@ -43,25 +43,14 @@ public class PieceNurseBlueHen extends PieceBlueHen
      * @return boolean
      */
     public boolean validRevivePath(int fromRow, int fromColumn, int toRow, int toColumn) {
-        boolean validMove = false;
-        if(canFly())
-        {
-            validMove = true;
-        }
-        /*
-        else
-        {
-            if(toRow == fromRow + 1 || toRow == fromRow - 1)
-            {
-                validMove = true;
-            }
-        }
-         */
-        return validMove;
+        return true;
     }
 
     /**
-     * Confirms that the Piece has a valid path.
+     * Confirms if the attacking can be done.
+     * The first two parameters represent the row index and column index of the board square
+     * that contains the piece attacking.
+     * The next two parameters represent the row index and column index of the piece being attacked.
      * @param fromRow: int
      * @param fromColumn: int
      * @param toRow: int
@@ -69,21 +58,14 @@ public class PieceNurseBlueHen extends PieceBlueHen
      * @return boolean
      */
     @Override
-    public boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn)
+    public boolean validAttackPath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
         boolean validMove = false;
-        if(canFly())
+        if((toRow == fromRow + 1 || toRow == fromRow - 1 || toRow == fromRow)
+                && (toColumn == fromColumn + 1 || toColumn == fromColumn - 1 || toColumn == fromColumn))
         {
             validMove = true;
         }
-        else
-        {
-            if((toRow == fromRow + 1 || toRow == fromRow - 1 || toRow == fromRow) && (toColumn == fromColumn + 1 || toColumn == fromColumn - 1 || toColumn == fromColumn))
-            {
-                validMove = true;
-            }
-        }
-
         return validMove;
     }
 
@@ -98,30 +80,9 @@ public class PieceNurseBlueHen extends PieceBlueHen
      * @param toColumn: int
      * @return boolean
      */
-
     @Override
     public boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
-        boolean validMove = false;
-
-        if(canFly())
-        {
-            validMove = true;
-        }
-        else
-        {
-            if((toRow == fromRow + 1 || toRow == fromRow - 1) && (toColumn == fromColumn + 1 || toColumn == fromColumn - 1))
-            {
-                validMove = true;
-            }
-        }
-
-        return validMove;
-    }
-
-    @Override
-    public boolean canSpawn()
-    {
-        return false;
+        return true;
     }
 }

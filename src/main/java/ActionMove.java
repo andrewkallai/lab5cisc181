@@ -43,6 +43,13 @@ public class ActionMove extends Action
             Piece movingPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
             field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(movingPiece);
+            //New Piece Modification
+            if (movingPiece instanceof PieceAbominableSnowman) {
+                ((PieceAbominableSnowman) movingPiece).decreaseMass();
+                if (((PieceAbominableSnowman) movingPiece).getMass() == 0) {
+                    field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
+                }
+            }
             field.changeTurn();
         }
 

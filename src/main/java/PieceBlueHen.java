@@ -31,27 +31,11 @@ public class PieceBlueHen extends Piece implements Attacker, Recruiter{
         this.numRecruits = numRecruits;
         updateFly();
     }
-/*
-    public int getNumAttacks(){
-        return this.numAttacks;
-    }
-    public int getNumRecruits(){
-        return this.numRecruits;
-    }
-*/
+
     public boolean canFly()    {
         return this.flies;
     }
-/*
-    public void setNumAttacks(int numAttacks)    {
-        this.numAttacks = numAttacks;
-        updateFly();
-    }
 
-    public void setNumRecruits(int numRecruits)    {
-        this.numRecruits = numRecruits;
-    }
-*/
     private void updateFly(){
         if (this.numAttacks < MAX_NUM_ATTACKS){
             this.flies = true;
@@ -148,6 +132,7 @@ public class PieceBlueHen extends Piece implements Attacker, Recruiter{
      * @param toColumn: int
      * @return boolean
      */
+    @Override
     public boolean validMovePath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
         boolean validMove = false;

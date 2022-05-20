@@ -27,18 +27,12 @@ public class ActionAttack extends Action
      */
     public void performAction() {
         Piece attacker = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
-        //PieceEvilMinion evilPiece = (PieceEvilMinion) attacker;
         Piece attacked = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
-        //PieceMinion minion = (PieceMinion) attacked;
-
         if ((attacker instanceof PieceEvilMinion) && (attacked instanceof PieceMinion) && attacker.getTeamColor().equals(attacked.getTeamColor()))
         {
-            //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
             attacker.speak();
-            //Piece attackedPiece = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
             field.getOpponentTeam().removePieceFromTeam(attacked);
-            //Piece newPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().spawn();
             Piece newPiece = attacker.spawn();
             PieceEvilMinion newEvilMinion = (PieceEvilMinion) newPiece;
             field.getCurrentTeam().addPieceToTeam(newEvilMinion);
@@ -46,21 +40,18 @@ public class ActionAttack extends Action
             field.changeTurn();
         }
         else {
+            attacker.speak();
+            field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
+            field.getOpponentTeam().removePieceFromTeam(attacked);
+            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
+            field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(attacker);
+            //New Piece Modification
             if (attacker instanceof PieceAbominableSnowman) {
                 ((PieceAbominableSnowman) attacker).decreaseMass();
                 if (((PieceAbominableSnowman) attacker).getMass() == 0) {
                     field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
-                    //field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece (movingPiece);
                 }
             }
-            //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
-            attacker.speak();
-            //Piece attackedPiece = field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].getPiece();
-            field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
-            field.getOpponentTeam().removePieceFromTeam(attacked);
-            //Piece attackingPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
-            field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
-            field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(attacker);
             field.changeTurn();
         }
 

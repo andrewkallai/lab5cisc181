@@ -116,9 +116,9 @@ public class Rules
             {
                 currentPiece = "PieceBuzz";
             }
-            else if(fromPiece instanceof PieceNurseBlueHen)
+            else if(fromPiece instanceof PieceNurseBlueHen)//New Extended Piece Modification
             {
-                currentPiece = "PieceMinion";
+                currentPiece = "PieceNurseBlueHen";
             }
             else if(fromPiece instanceof PieceBlueHen)
             {
@@ -132,7 +132,7 @@ public class Rules
             {
                 currentPiece = "PieceMinion";
             }
-            else if(fromPiece instanceof PieceAbominableSnowman)
+            else if(fromPiece instanceof PieceAbominableSnowman) //New Piece Modification
             {
                 currentPiece = "PieceAbominableSnowman";
             }
@@ -147,7 +147,10 @@ public class Rules
                     case "PieceEvilMinion" ->
                             ((PieceEvilMinion) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
                     case "PieceMinion" -> ((PieceMinion) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
-                    // case "PieceAbominableSnowman" -> ((PieceAbominableSnowman) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
+                    case "PieceAbominableSnowman" ->  //New Piece Modification
+                            ((PieceAbominableSnowman) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
+                    case "PieceNurseBlueHen" ->  //New Extended Piece Modification
+                            ((PieceNurseBlueHen) fromPiece).validMovePath(fromRow, fromColumn, toRow, toColumn);
                     default -> false;
                 };
             }
@@ -210,7 +213,7 @@ public class Rules
                     isValidMove = isToSquareEmpty;
                 }
             }
-            else if(action == 'R' && !currentPiece.equals("PieceBuzz")) // PieceBuzz cannot recruit
+            else if(action == 'R' && (!currentPiece.equals("PieceBuzz") || !currentPiece.equals("PieceNurseBlueHen"))) // PieceBuzz and PieceNusreBlueHen cannot recruit //New Extended Piece Modification
             {
                 isValidMove = !isToSquareEmpty && enemyTeam.getTeamColor().equals(toSquare.getPiece().getTeamColor()) && switch (currentPiece) {
                     case "PieceBlueHen" ->
@@ -218,6 +221,8 @@ public class Rules
                     case "PieceEvilMinion" ->
                             ((PieceEvilMinion) fromPiece).validRecruitPath(fromRow, fromColumn, toRow, toColumn);
                     case "PieceMinion" -> ((PieceMinion) fromPiece).validRecruitPath(fromRow, fromColumn, toRow, toColumn);
+                    case "PieceAbominableSnowman" -> //New Piece Modification
+                            ((PieceAbominableSnowman) fromPiece).validRecruitPath(fromRow, fromColumn, toRow, toColumn);
                     default -> false;
                 };
             }
@@ -245,8 +250,18 @@ public class Rules
                     // valid if target is an enemy AND the movePath is valid
                     isValidMove = ((PieceBlueHen) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn);
                 }
+                else if(currentPiece.equals("PieceAbominableSnowman") && toSquarePieceIsEnemy) //New Piece Modification
+                {
+                    // valid if target is an enemy AND the movePath is valid
+                    isValidMove = ((PieceAbominableSnowman) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn);
+                }
+                else if(currentPiece.equals("PieceNurseBlueHen") && toSquarePieceIsEnemy) //New Extended Piece Modification
+                {
+                    // valid if target is an enemy AND the movePath is valid
+                    isValidMove = ((PieceNurseBlueHen) fromPiece).validAttackPath(fromRow, fromColumn, toRow, toColumn);
+                }
             }
-            else if(action == 'G' && currentPiece.equals("PieceNurseBlueHen"))
+            else if(action == 'G' && currentPiece.equals("PieceNurseBlueHen")) //New Extended Piece Modification
             {
                 isValidMove = toSquare.isEmpty();
             }
