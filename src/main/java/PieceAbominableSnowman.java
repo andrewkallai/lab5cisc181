@@ -22,17 +22,21 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
         this.mass = 100;
     }
 
-    public PieceAbominableSnowman (char symbol, String teamColor, int numAttacks, int numRecruits, boolean hidden, boolean original){
+    public PieceAbominableSnowman (char symbol, String teamColor, int numAttacks, int numRecruits, boolean hidden, boolean original, int mass){
         super(symbol,teamColor, hidden, original);
         this.numAttacks = numAttacks;
         this.numRecruits = numRecruits;
-        this.mass = 80;
+        this.mass = mass;
     }
 
     public int getMass()
     {
         return this.mass;
     }
+/*
+    public boolean canSpawn(){
+        return true;
+    }*/
 
     public void decreaseMass(){
         this.mass = this.mass - 10;
@@ -74,7 +78,7 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
         PieceAbominableSnowman makeSnowman =
                 new PieceAbominableSnowman(Character.toLowerCase(this.symbol),
                         this.teamColor,this.numAttacks,this.numRecruits,
-                        false,false);//add things inside
+                        false,false, 80);//add things inside
         return makeSnowman;
     }
 
