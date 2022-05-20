@@ -87,6 +87,7 @@ public class PieceBlueHen extends Piece implements Attacker, Recruiter{
      * Confirms that the PieceBlueHen can be created.
      * @return boolean
      */
+    @Override
     public boolean canSpawn(){
         return true;
     }

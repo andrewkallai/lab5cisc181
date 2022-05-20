@@ -48,6 +48,10 @@ public class ActionAttack extends Action
         else {
             if (attacker instanceof PieceAbominableSnowman) {
                 ((PieceAbominableSnowman) attacker).decreaseMass();
+                if (((PieceAbominableSnowman) attacker).getMass() == 0) {
+                    field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
+                    //field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece (movingPiece);
+                }
             }
             //field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
             attacker.speak();
@@ -57,10 +61,13 @@ public class ActionAttack extends Action
             //Piece attackingPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
             field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(attacker);
-            if (((PieceAbominableSnowman) attacker).getMass() == 0) {
-                field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].removePiece();
-                //field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece (movingPiece);
-            }
+            field.changeTurn();
+        }
+
+        if(field.getSkipTurn() == 1)
+        {
+            field.setSkipTurn(0);
+            System.out.println("Your previous action was a revive. Your turn will be skipped!");
             field.changeTurn();
         }
     }

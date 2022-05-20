@@ -70,6 +70,9 @@ public class TextView {
                 } else if ((usrInput.charAt(0) == 'S') || (usrInput.charAt(0) == 's')) {
                     returnChar = usrInput.charAt(0);
                     validValue = true;
+                } else if ((usrInput.charAt(0) == 'G') || (usrInput.charAt(0) == 'g')) {
+                    returnChar = usrInput.charAt(0);
+                    validValue = true;
                 } else {
                     System.out.println("Invalid input.");
                 }

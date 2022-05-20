@@ -82,6 +82,12 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
         return makeSnowman;
     }
 
+    @Override
+    public boolean canSpawn()
+    {
+        return true;
+    }
+
     /**
      * Confirms if the recruiting can be done.
      * The first two parameters represent the row index and column index of the board square
