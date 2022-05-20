@@ -34,7 +34,10 @@ public class Controller
                 9,false,true));
         piecesTeamA.add(new PieceEvilMinion('E',"Blu",1,
                 1,4,false, true));
+        //New Extended Piece Modification
         piecesTeamA.add(new PieceNurseBlueHen('N',"Blu", false, true,0, 0));
+        //New Piece Modification
+        piecesTeamA.add(new PieceAbominableSnowman('S',"Blu", 0, 0, false, true, 100));
         // Create a team object
         Team teamA = new Team("Blu",piecesTeamA);
         // Create 4 pieces for team B
@@ -48,7 +51,10 @@ public class Controller
                 true,false,true));
         piecesTeamB.add(new PieceEvilMinion('E',"Red",1,
                 1,4,false, true));
+        //New Extended Piece Modification
         piecesTeamB.add(new PieceNurseBlueHen('N',"Red", false, true, 0, 0));
+        //New Piece Modification
+        piecesTeamB.add(new PieceAbominableSnowman('S',"Red", 0, 0, false, true, 100));
         // Create a team object
         Team teamB = new Team("Red",piecesTeamB);
         // Create an instance of the game
