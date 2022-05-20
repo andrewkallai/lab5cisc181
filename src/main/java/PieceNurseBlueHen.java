@@ -15,7 +15,7 @@ public class PieceNurseBlueHen extends PieceBlueHen
     private int numRevives;
 
     public PieceNurseBlueHen (int numRevives, int numAttacks){
-        super('H',"NON", numAttacks, 0, false, true);
+        super('N',"NON", numAttacks, 0, false, true);
         this.numRevives = numRevives;
     }
 
