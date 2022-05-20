@@ -33,10 +33,6 @@ public class PieceAbominableSnowman extends Piece implements Attacker, Recruiter
     {
         return this.mass;
     }
-/*
-    public boolean canSpawn(){
-        return true;
-    }*/
 
     public void decreaseMass(){
         this.mass = this.mass - 10;
