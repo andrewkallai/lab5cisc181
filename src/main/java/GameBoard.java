@@ -94,7 +94,7 @@ public class GameBoard
             column = (int)(Math.random() * numColumns);
         }
 
-        System.out.println("DEBUG:\nFound empty space a row: " + row + " column: " + column);
+        //System.out.println("DEBUG:\nFound empty space a row: " + row + " column: " + column);
         return squares[row][column];
     }
 

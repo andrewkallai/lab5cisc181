@@ -55,6 +55,7 @@ public class TextView {
             System.out.println("M (move)");
             System.out.println("R (recruit)");
             System.out.println("S (spawn)");
+            System.out.println("G (revive)");
             System.out.print(": ");
             if (scr.hasNext()) {
                 String usrInput = scr.next();

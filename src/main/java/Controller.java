@@ -159,7 +159,7 @@ public class Controller
                         listPieces = listPieces + allowedRevives.get(index) + " ";
                     }
                     // END REGION
-                    System.out.println("Your current dead pieces are: " + listPieces);
+                    System.out.println("Your current pieces in the graveyard are: " + listPieces);
                     System.out.print(": ");
 
                     pieceToRevive = scan.next();
