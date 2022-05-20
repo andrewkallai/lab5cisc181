@@ -14,9 +14,14 @@ public class PieceNurseBlueHen extends PieceBlueHen
 {
     private int numRevives;
 
-    public PieceNurseBlueHen(char symbol, String teamColor, boolean hidden, boolean original, int numRevives)
+    public PieceNurseBlueHen (int numRevives, int numAttacks){
+        super('H',"NON", numAttacks, 0, false, true);
+        this.numRevives = numRevives;
+    }
+
+    public PieceNurseBlueHen(char symbol, String teamColor, boolean hidden, boolean original, int numAttacks, int numRevives)
     {
-        super(symbol, teamColor, 0, 0, hidden, original);
+        super(symbol, teamColor, numAttacks, 0, hidden, original);
         this.numRevives = numRevives;
     }
 
