@@ -75,6 +75,8 @@ public class GameBoard
             }
         }
 
+        // New Board Square Modification
+        // Finds an empty square and set it as a black hole.
         blackHole = findRandomEmptySpace();
         blackHole.setBlackHole(true);
     }
@@ -94,7 +96,6 @@ public class GameBoard
             column = (int)(Math.random() * numColumns);
         }
 
-        //System.out.println("DEBUG:\nFound empty space a row: " + row + " column: " + column);
         return squares[row][column];
     }
 

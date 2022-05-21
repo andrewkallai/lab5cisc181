@@ -156,6 +156,7 @@ public class TextView {
         System.out.println("The game has ended!");
         if(game.isAWinner())
         {
+            // New Objective Modification // Displays win message according to winType.
             if(((GameS22) game).getWinType().equals("elimination"))
             {
                 System.out.println("Winner by elimination! You have defeated your foe in glorious combat!");

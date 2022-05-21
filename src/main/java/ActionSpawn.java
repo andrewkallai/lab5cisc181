@@ -23,6 +23,7 @@ public class ActionSpawn extends Action
     public void performAction(){
 
         // REGION // REMOVES PIECE IF IT SPAWNS ON A BLACK HOLE
+        // Board Square Modification
         if(field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isBlackHole())
         {
             if(!field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isDiscovered())
@@ -52,6 +53,7 @@ public class ActionSpawn extends Action
             field.changeTurn();
         }
 
+        // New Rule Modification
         if(field.getSkipTurn() == 1)
         {
             field.setSkipTurn(0);

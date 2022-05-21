@@ -22,6 +22,7 @@ public class ActionRevive extends Action
 
     @Override
     public void performAction() {
+        // REGION New Board Square Modification
         if(field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isBlackHole())
         {
             if(!field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isDiscovered())
@@ -32,8 +33,11 @@ public class ActionRevive extends Action
             System.out.println("You entered a black hole! You have lost your spawned piece!");
             field.changeTurn();
         }
+        // END REGION
         else
         {
+            // New Action Modification
+            // Adds a piece to the team, removes it from the deadPieces list, and sets it on the board (revives the piece)
             field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().speak();
             field.getCurrentTeam().addPieceToTeam(revivedPiece);
             field.getCurrentTeam().getDeadPieces().remove(revivedPiece);
@@ -41,6 +45,7 @@ public class ActionRevive extends Action
             field.changeTurn();
         }
 
+        // New Rule Modifcation
         field.setSkipTurn(1);
     }
 }

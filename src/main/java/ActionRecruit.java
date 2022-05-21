@@ -27,6 +27,7 @@ public class ActionRecruit extends Action
         field.getCurrentTeam().addPieceToTeam(recruitedPiece);
         field.changeTurn();
 
+        // New Rule Modification
         if(field.getSkipTurn() == 1)
         {
             field.setSkipTurn(0);

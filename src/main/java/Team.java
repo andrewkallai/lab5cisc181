@@ -36,6 +36,8 @@ public class Team {
         return this.pieces;
     }
 
+    // New Action Modification
+    // Adds an ArrayList that keeps track of dead pieces.
     public ArrayList<Piece> getDeadPieces()
     {
         return this.deadPieces;
@@ -96,13 +98,13 @@ public class Team {
             holdString = holdString + pieces.get(index).toString() + " ";
         }
 
-        // REGION // DEBUG STRING
-        String debug = "";
+        // REGION // New Action Modification // Display each team's graveyard
+        String graveYard = "";
         for(int index = 0;index<this.deadPieces.size();index++){
-            debug = debug + deadPieces.get(index).toString() + " ";
+            graveYard = graveYard + deadPieces.get(index).toString() + " ";
         }
         // END REGION
 
-        return "Team " + this.teamColor + " Pieces :\n" + holdString + "\nTeam " + this.teamColor + " Graveyard :\n" + debug;
+        return "Team " + this.teamColor + " Pieces :\n" + holdString + "\nTeam " + this.teamColor + " Graveyard :\n" + graveYard;
     }
 }

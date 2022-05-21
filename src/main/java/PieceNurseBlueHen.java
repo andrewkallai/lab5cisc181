@@ -17,17 +17,20 @@ public class PieceNurseBlueHen extends PieceBlueHen
     public PieceNurseBlueHen (int numRevives, int numAttacks){
         super('N',"NON", numAttacks, 0, false, true);
         this.numRevives = numRevives;
+        updateFly();
     }
 
     public PieceNurseBlueHen(char symbol, String teamColor, boolean hidden, boolean original, int numAttacks, int numRevives)
     {
         super(symbol, teamColor, numAttacks, 0, hidden, original);
         this.numRevives = numRevives;
+        updateFly();
     }
 
     public PieceNurseBlueHen()
     {
         super(0, 0);
+        updateFly();
     }
 
     public int getNumRevives()
@@ -38,6 +41,7 @@ public class PieceNurseBlueHen extends PieceBlueHen
     public void setNumRevives(int revives)
     {
         this.numRevives = revives;
+        updateFly();
     }
 
     /**

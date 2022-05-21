@@ -35,6 +35,7 @@ public class GameS22 extends Game
         return getWinner() != null;
     }
 
+    // New Rule Modification & New Objective Modification
     public void setSkipTurn(int skipTurn)
     {
         this.skipTurn = skipTurn;
@@ -70,11 +71,12 @@ public class GameS22 extends Game
             {
                 winner = teamTwo;
             }
-            else if(teamOne.getNumPiecesCaptured() > (int) (numTeamOnePieces * 0.7))
+            // New Objective Modification // Adds check for which team captured 70% of the other team's pieces.
+            else if(teamOne.getNumPiecesCaptured() > teamOneRecruitTarget)
             {
                 winner = teamOne;
             }
-            else if(teamTwo.getNumPiecesCaptured() > (int) (numTeamTwoPieces * 0.7))
+            else if(teamTwo.getNumPiecesCaptured() > teamTwoRecruitTarget)
             {
                 winner = teamTwo;
             }
@@ -97,9 +99,7 @@ public class GameS22 extends Game
     @Override
     public boolean isGameEnded()
     {
-        //System.out.println("DEBUG:\nteamOne captured pieces: " + teamOne.getNumPiecesCaptured() + " Needs more than: " + teamOneRecruitTarget + " to win.");
-        //System.out.println("DEBUG:\nteamTwo captured pieces: " + teamTwo.getNumPiecesCaptured() + " Needs more than: " + teamTwoRecruitTarget + " to win.");
-
+        // New Objective Modification // Checks for type of objective completed and sets the winType accordingly.
         if(teamOne.getTeamPieces().size() <= 0 || teamTwo.getTeamPieces().size() <= 0)
         {
             this.winType = "elimination";

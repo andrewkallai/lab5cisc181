@@ -42,7 +42,7 @@ public class BoardSquare
     }
 
     // REGION
-    // black hole methods
+    // black hole methods // New Board Square Modification
     public boolean isBlackHole()
     {
         return this.isBlackHole;
@@ -63,7 +63,7 @@ public class BoardSquare
     }
 
     // REGION
-    // black hole methods
+    // black hole methods // New Board Square Modifications
     public void setBlackHole(boolean isBlackHole)
     {
         this.isBlackHole = isBlackHole;
@@ -92,7 +92,7 @@ public class BoardSquare
      */
     @Override
     public String toString(){
-        if(isBlackHole && isDiscovered) // prints black hole when discovered (piece lands on square)
+        if(isBlackHole && isDiscovered) // prints black hole when discovered (piece lands on square) // New Board Square Modifications
         {
             return "~~~O~~~";
         }

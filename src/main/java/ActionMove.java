@@ -21,7 +21,7 @@ public class ActionMove extends Action
      * sets that Piece on the "to" board square, and changes the turn.
      */
     public void performAction(){
-        // REGION - removes piece if it lands on the black hole
+        // REGION - removes piece if it lands on the black hole // New Board Square Modification
         if(field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isBlackHole())
         {
             if(!field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].isDiscovered())
@@ -53,6 +53,7 @@ public class ActionMove extends Action
             field.changeTurn();
         }
 
+        // New Rule Modification
         if(field.getSkipTurn() == 1)
         {
             field.setSkipTurn(0);

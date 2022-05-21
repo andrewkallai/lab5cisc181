@@ -20,6 +20,8 @@ public abstract class Piece implements Comparable<Piece>
     protected String teamColor;
     protected boolean hidden ;
     protected boolean original;
+    // New Objective Modification
+    // Used to ensure the same piece can't be recruited over and over again to win.
     protected boolean recruited;
 
     public Piece(char symbol, String teamColor, boolean hidden, boolean original){

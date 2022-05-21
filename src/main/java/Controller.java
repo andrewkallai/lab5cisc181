@@ -101,6 +101,16 @@ public class Controller
 
     }
 
+    /**
+     * @param fromRow the row of the piece performing the action
+     * @param fromColumn the column of the piece performing the action
+     * @param toRow the row of the target/selected square
+     * @param toColumn the column of the target/selected square
+     * @param piece the piece the player selected to revive
+     * @param allowedRevives the list of pieces that can be revived
+     * @param deadPieces the list of dead Pieces
+     */
+    // New Action Modification
     private void carryOutAction(int fromRow, int fromColumn, int toRow, int toColumn, String piece, ArrayList<String> allowedRevives, ArrayList<Piece> deadPieces)
     {
         int pieceIndex = allowedRevives.indexOf(piece);
@@ -125,6 +135,9 @@ public class Controller
             while (!validAction) {
                 textView.getPlayersNextAction(game); // TextView method
                 nextAction = textView.getActionType();
+                // New Action Modification
+                // Checks if action is 'G', if it is, then turn Piece list into string format
+                // and accepts input in String format.
                 if(nextAction == 'G')
                 {
                     Scanner scan = new Scanner(System.in);
@@ -182,6 +195,7 @@ public class Controller
                 }
             }
             nextAction = textView.getActionType();
+            // New Action Modification // If a piece to revive is selected, use overloaded carryOutAction with specific details, else do normal carryOutAction
             if(!pieceToRevive.equals("NULL"))
             {
                 carryOutAction(textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), pieceToRevive, allowedRevives, deadPieces);

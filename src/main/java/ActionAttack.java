@@ -55,6 +55,7 @@ public class ActionAttack extends Action
             field.changeTurn();
         }
 
+        // New Rule Modification
         if(field.getSkipTurn() == 1)
         {
             field.setSkipTurn(0);
