@@ -88,7 +88,7 @@ public class GameBoard
         int row = (int)(Math.random() * numRows);
         int column = (int)(Math.random() * numColumns);
 
-        while(!squares[row][column].isEmpty())
+        while(!squares[row][column].isEmpty() && !squares[row][column].isBlackHole())
         {
             row = (int)(Math.random() * numRows);
             column = (int)(Math.random() * numColumns);

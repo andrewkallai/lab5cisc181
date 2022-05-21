@@ -170,7 +170,7 @@ public class Controller
 
                     pieceToRevive = scan.next();
 
-                    validAction = allowedRevives.contains(pieceToRevive);
+                    validAction = allowedRevives.contains(pieceToRevive) && Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);
                 }
                 else {
                     validAction = Rules.checkValidAction(game, textView.getRowIndexFromSquare(), textView.getColumnIndexFromSquare(), textView.getRowIndexToSquare(), textView.getColumnIndexToSquare(), nextAction);

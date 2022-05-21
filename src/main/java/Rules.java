@@ -213,7 +213,7 @@ public class Rules
                     isValidMove = isToSquareEmpty;
                 }
             }
-            else if(action == 'R' && (!currentPiece.equals("PieceBuzz") || !currentPiece.equals("PieceNurseBlueHen"))) // PieceBuzz and PieceNusreBlueHen cannot recruit //New Extended Piece Modification
+            else if(action == 'R' && (!currentPiece.equals("PieceBuzz") && !currentPiece.equals("PieceNurseBlueHen"))) // PieceBuzz and PieceNusreBlueHen cannot recruit //New Extended Piece Modification
             {
                 isValidMove = !isToSquareEmpty && enemyTeam.getTeamColor().equals(toSquare.getPiece().getTeamColor()) && switch (currentPiece) {
                     case "PieceBlueHen" ->
@@ -263,7 +263,7 @@ public class Rules
             }
             else if(action == 'G' && currentPiece.equals("PieceNurseBlueHen")) //New Extended Piece Modification
             {
-                isValidMove = toSquare.isEmpty();
+                isValidMove = toSquare.isEmpty() && ((PieceNurseBlueHen) fromPiece).validRevivePath(fromRow, fromColumn, toRow, toColumn);
             }
         }
 
@@ -282,6 +282,8 @@ public class Rules
                 9,false,true));
         piecesTeamA.add(new PieceEvilMinion('E',"Blu",1,
                 1,4,false, true));
+        piecesTeamA.add(new PieceNurseBlueHen('N',"Blu",false, true, 0,0));
+        piecesTeamA.add(new PieceAbominableSnowman('S',"Blu",0,0,false,true,100));
         // Create a team object
         Team teamA = new Team("Blu",piecesTeamA);
 
@@ -296,6 +298,8 @@ public class Rules
                 true,false,true));
         piecesTeamB.add(new PieceEvilMinion('E',"Red",1,
                 1,4,false, true));
+        piecesTeamB.add(new PieceNurseBlueHen('N',"Red",false, true, 0,0));
+        piecesTeamB.add(new PieceAbominableSnowman('S',"Red",0,0,false,true,100));
         // Create a team object
         Team teamB = new Team("Red",piecesTeamB);
 
@@ -315,10 +319,14 @@ public class Rules
         game.getGameBoard().getSquares()[0][1].setPiece(piecesTeamA.get(1));
         game.getGameBoard().getSquares()[0][2].setPiece(piecesTeamA.get(2));
         game.getGameBoard().getSquares()[0][3].setPiece(piecesTeamA.get(3));
+        game.getGameBoard().getSquares()[0][4].setPiece(piecesTeamA.get(4));
+        game.getGameBoard().getSquares()[0][5].setPiece(piecesTeamA.get(5));
         game.getGameBoard().getSquares()[2][0].setPiece(piecesTeamB.get(0));
         game.getGameBoard().getSquares()[2][1].setPiece(piecesTeamB.get(1));
         game.getGameBoard().getSquares()[2][2].setPiece(piecesTeamB.get(2));
         game.getGameBoard().getSquares()[2][3].setPiece(piecesTeamB.get(3));
+        game.getGameBoard().getSquares()[2][4].setPiece(piecesTeamB.get(4));
+        game.getGameBoard().getSquares()[2][5].setPiece(piecesTeamB.get(5));
 
         System.out.println(game);
 
@@ -328,387 +336,5 @@ public class Rules
         // BLUE TEAM TURN
 
         System.out.println("testing blue team's MOVE");
-
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                1,4,'M'));
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                1,4,'M'));
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,2,
-                1,4,'M'));
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                1,4,'M'));
-
-        // To Square isn't empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,1,'M'));
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                0,1,'M'));
-        // This isn't current team's piece - should not be valid
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,5,'M'));
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'M'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'M'));
-
-        System.out.println("testing blue team's SPAWN");
-
-        // This is a PieceBuzz - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                0,5,'S'));
-        // toSquare is not empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,3,'S'));
-        // fromSquare is not on the same team - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,5,'S'));
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                0,5,'S'));
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'S'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'S'));
-
-        // Should be able to spawn - should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,5,'S'));
-        // Should be able to spawn - should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,2,
-                0,5,'S'));
-        // Should be able to spawn - should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                0,5,'S'));
-
-        System.out.println("Testing blue team's RECRUIT");
-
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                2,0,'R'));
-        // toSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,5,'R'));
-        // toSquare is on the same team - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,1,'R'));
-        // Piece is Buzz - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                2,0,'R'));
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'R'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'R'));
-
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                2,0,'R'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,2,
-                2,1,'R'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                2,2,'R'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                2,3,'R'));
-
-        System.out.println("Testing blue team's ATTACK");
-
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'A'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'A'));
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                2,0,'A'));
-        // toSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                0,5,'A'));
-        // toSquare is on the same team and Piece is NOT an EvilMinion - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                0,1,'A'));
-        // Piece is Minion - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                2,0,'A'));
-
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                2,0,'A'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,2,
-                2,1,'A'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                2,2,'A'));
-        // This should be valid move. Piece is EvilMinion and EvilMinion is hungry
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                0,2,'A'));
-
-        ((PieceEvilMinion) piecesTeamA.get(3)).setNumAttacks(50);
-        ((PieceEvilMinion) piecesTeamA.get(3)).updateHungry();
-        // Piece is EvilMinion, but EvilMinion is NOT hungry - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                0,0,'A'));
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,3,
-                2,0,'A'));
-
-        ((PieceBuzz) piecesTeamA.get(1)).setWorkingLaser(false);
-        // Piece is Buzz, but Buzz's laser is disabled - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                2,0,'A'));
-        // Piece is Buzz, but Buzz's laser is disabled AND targeting own team - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,1,
-                0,0,'A'));
-
-        // You can change the turn to test the other team pieces
-        game.changeTurn();
-
-        System.out.println(game);
-
-        // RED TEAM TURN
-
-        System.out.println("Testing red team's MOVE");
-
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                1,4,'M'));
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                1,5,'M'));
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,2,
-                2,5,'M'));
-        // This should be a valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                5,5,'M'));
-
-        // To Square isn't empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,1,'M'));
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                1,1,'M'));
-        // This isn't current team's piece - should not be valid
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,5,'M'));
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'M'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'M'));
-
-        System.out.println("testing red team's SPAWN");
-
-        // This is a PieceBuzz - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,2,
-                0,5,'S'));
-        // toSquare is not empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,3,'S'));
-        // fromSquare is not on the same team - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                0,5,'S'));
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                0,5,'S'));
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'S'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'S'));
-
-        // Should be able to spawn - should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,5,'S'));
-        // Should be able to spawn - should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                0,5,'S'));
-        // Should be able to spawn - should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                0,5,'S'));
-
-        System.out.println("Testing red team's RECRUIT");
-
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                0,0,'R'));
-        // toSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,5,'R'));
-        // toSquare is on the same team - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                2,0,'R'));
-        // Piece is Buzz - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,2,
-                0,0,'R'));
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'R'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'R'));
-
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,0,'R'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                0,1,'R'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                0,2,'R'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                0,3,'R'));
-
-        System.out.println("Testing red team's ATTACK");
-
-        // fromSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                10,10,
-                0,1,'A'));
-        // toSquare index out of bounds - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,0,
-                6,1,'A'));
-        // fromSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                0,4,
-                0,0,'A'));
-        // toSquare is empty - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                0,5,'A'));
-        // toSquare is on the same team and Piece is NOT an EvilMinion - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                2,0,'A'));
-        // Piece is Minion - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,0,
-                0,2,'A'));
-
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,1,
-                0,0,'A'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,2,
-                0,1,'A'));
-        // This should be valid move
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                0,2,'A'));
-        // This should be valid move. Piece is EvilMinion and EvilMinion is hungry
-        System.out.println("expected: TRUE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                0,3,'A'));
-
-        ((PieceEvilMinion) piecesTeamB.get(3)).setNumAttacks(50);
-        ((PieceEvilMinion) piecesTeamB.get(3)).updateHungry();
-        // Piece is EvilMinion, but EvilMinion is NOT hungry - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                2,0,'A'));
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,3,
-                0,0,'A'));
-
-        ((PieceBuzz) piecesTeamB.get(2)).setWorkingLaser(false);
-        // Piece is Buzz, but Buzz's laser is disabled - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,2,
-                0,2,'A'));
-        // Piece is Buzz, but Buzz's laser is disabled AND targeting own team - should not be a valid move
-        System.out.println("expected: FALSE, GOT: " + Rules.checkValidAction(game,
-                2,2,
-                2,0,'A'));
-
     }
 }

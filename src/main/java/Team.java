@@ -103,6 +103,6 @@ public class Team {
         }
         // END REGION
 
-        return "Team " + this.teamColor + " Pieces :\n" + holdString + "\nTeam " + this.teamColor + " Pieces in Graveyard :\n" + debug;
+        return "Team " + this.teamColor + " Pieces :\n" + holdString + "\nTeam " + this.teamColor + " Graveyard :\n" + debug;
     }
 }

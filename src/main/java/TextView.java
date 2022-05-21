@@ -156,6 +156,15 @@ public class TextView {
         System.out.println("The game has ended!");
         if(game.isAWinner())
         {
+            if(((GameS22) game).getWinType().equals("elimination"))
+            {
+                System.out.println("Winner by elimination! You have defeated your foe in glorious combat!");
+            }
+            else if(((GameS22) game).getWinType().equals("pacifist"))
+            {
+                System.out.println("The pen is mightier than the sword! You have won without any combat! Gold star!");
+            }
+
             System.out.println("The winning team is: " + game.getWinner().getTeamColor());
         }
         else

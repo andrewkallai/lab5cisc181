@@ -25,18 +25,19 @@ public class PieceNurseBlueHen extends PieceBlueHen
         this.numRevives = numRevives;
     }
 
-    public PieceNurseBlueHen(int numRevives)
+    public PieceNurseBlueHen()
     {
         super(0, 0);
-        this.numRevives = numRevives;
     }
 
-    public int getNumRevives() {
+    public int getNumRevives()
+    {
         return this.numRevives;
     }
 
-    public void setNumRevives(int recruits) {
-        this.numRevives = recruits;
+    public void setNumRevives(int revives)
+    {
+        this.numRevives = revives;
     }
 
     /**
@@ -47,8 +48,15 @@ public class PieceNurseBlueHen extends PieceBlueHen
      * @param toColumn: int
      * @return boolean
      */
-    public boolean validRevivePath(int fromRow, int fromColumn, int toRow, int toColumn) {
-        return true;
+    public boolean validRevivePath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        return (toRow == fromRow + 1 || toRow == fromRow - 1 || toRow == fromRow) && (toColumn == fromColumn + 1 || toColumn == fromColumn - 1 || toColumn == fromColumn);
+    }
+
+    @Override
+    public void updateFly()
+    {
+        this.flies = numRevives < 1;
     }
 
     /**
@@ -65,13 +73,7 @@ public class PieceNurseBlueHen extends PieceBlueHen
     @Override
     public boolean validAttackPath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
-        boolean validMove = false;
-        if((toRow == fromRow + 1 || toRow == fromRow - 1 || toRow == fromRow)
-                && (toColumn == fromColumn + 1 || toColumn == fromColumn - 1 || toColumn == fromColumn))
-        {
-            validMove = true;
-        }
-        return validMove;
+        return false;
     }
 
     /**
@@ -89,5 +91,17 @@ public class PieceNurseBlueHen extends PieceBlueHen
     public boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
         return true;
+    }
+
+    @Override
+    public boolean validRecruitPath(int fromRow, int fromColumn, int toRow, int toColumn)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canSpawn()
+    {
+        return false;
     }
 }

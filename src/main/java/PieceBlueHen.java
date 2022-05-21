@@ -14,7 +14,7 @@
 public class PieceBlueHen extends Piece implements Attacker, Recruiter{
     private int numAttacks;
     private int numRecruits;
-    private boolean flies;
+    protected boolean flies;
 
     final public int MAX_NUM_ATTACKS = 3;
 
@@ -36,7 +36,7 @@ public class PieceBlueHen extends Piece implements Attacker, Recruiter{
         return this.flies;
     }
 
-    private void updateFly(){
+    protected void updateFly(){
         if (this.numAttacks < MAX_NUM_ATTACKS){
             this.flies = true;
         }

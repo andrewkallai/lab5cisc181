@@ -20,6 +20,7 @@ public class GameS22 extends Game
     private int teamTwoRecruitTarget = (int) (numTeamTwoPieces * 0.7);
 
     private int skipTurn = 0;
+    private String winType;
 
     public GameS22(int row, int column, Team teamOne, Team teamTwo)
     {
@@ -42,6 +43,14 @@ public class GameS22 extends Game
     public int getSkipTurn()
     {
         return this.skipTurn;
+    }
+    public void setWinType(String winType)
+    {
+        this.winType = winType;
+    }
+    public String getWinType()
+    {
+        return this.winType;
     }
 
     /**
@@ -88,8 +97,17 @@ public class GameS22 extends Game
     @Override
     public boolean isGameEnded()
     {
-        //System.out.println("DEBUG:\nteamOne captured pieces: " + teamOne.getNumPiecesCaptured() + " Needs: " + teamOneRecruitTarget + " to win.");
-        //System.out.println("DEBUG:\nteamTwo captured pieces: " + teamTwo.getNumPiecesCaptured() + " Needs: " + teamTwoRecruitTarget + " to win.");
+        //System.out.println("DEBUG:\nteamOne captured pieces: " + teamOne.getNumPiecesCaptured() + " Needs more than: " + teamOneRecruitTarget + " to win.");
+        //System.out.println("DEBUG:\nteamTwo captured pieces: " + teamTwo.getNumPiecesCaptured() + " Needs more than: " + teamTwoRecruitTarget + " to win.");
+
+        if(teamOne.getTeamPieces().size() <= 0 || teamTwo.getTeamPieces().size() <= 0)
+        {
+            this.winType = "elimination";
+        }
+        else if(teamOne.getNumPiecesCaptured() > teamOneRecruitTarget || teamTwo.getNumPiecesCaptured() > teamTwoRecruitTarget)
+        {
+            this.winType = "pacifist";
+        }
 
         return teamOne.getTeamPieces().size() <= 0 || teamTwo.getTeamPieces().size() <= 0
                 || teamOne.getNumPiecesCaptured() > teamOneRecruitTarget
