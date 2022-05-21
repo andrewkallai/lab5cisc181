@@ -172,7 +172,7 @@ public class Controller
                             allowedRevives.add("nurse");
                         }
                     }
-                    // REGION // DEBUG STRING
+                    // REGION // New Action Modification // Shows String list of revivable pieces
                     String listPieces = "";
                     for(int index = 0;index<allowedRevives.size();index++){
                         listPieces = listPieces + allowedRevives.get(index) + " ";
