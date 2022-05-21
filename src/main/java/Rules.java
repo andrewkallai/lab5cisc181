@@ -208,12 +208,17 @@ public class Rules
                 {
                     isValidMove = ((PieceEvilMinion) fromPiece).canSpawn();
                 }
+                else if(currentPiece.equals("PieceAbominableSnowman"))//New Piece Modification
+                {
+                    if ( !(((PieceAbominableSnowman) fromPiece).getMass() < 50) )
+                        isValidMove = isToSquareEmpty;
+                }
                 else
                 {
                     isValidMove = isToSquareEmpty;
                 }
             }
-            else if(action == 'R' && (!currentPiece.equals("PieceBuzz") && !currentPiece.equals("PieceNurseBlueHen"))) // PieceBuzz and PieceNusreBlueHen cannot recruit //New Extended Piece Modification
+            else if(action == 'R' && (!currentPiece.equals("PieceBuzz") && !currentPiece.equals("PieceNurseBlueHen"))) // PieceBuzz and PieceNurseBlueHen cannot recruit //New Extended Piece Modification
             {
                 isValidMove = !isToSquareEmpty && enemyTeam.getTeamColor().equals(toSquare.getPiece().getTeamColor()) && switch (currentPiece) {
                     case "PieceBlueHen" ->

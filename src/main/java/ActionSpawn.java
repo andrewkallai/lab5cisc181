@@ -40,6 +40,15 @@ public class ActionSpawn extends Action
             Piece spawnedPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece().spawn();
             field.getCurrentTeam().addPieceToTeam(spawnedPiece);
             field.getBoardSquares()[toSquareRowIndex][toSquareColumnIndex].setPiece(spawnedPiece);
+            Piece oldPiece = field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].getPiece();
+            //New Piece Modification
+            if (oldPiece instanceof PieceAbominableSnowman) {
+                ((PieceAbominableSnowman) oldPiece).decreaseMass();
+                ((PieceAbominableSnowman) oldPiece).decreaseMass();
+                if (((PieceAbominableSnowman) oldPiece).getMass() == 0) {
+                    field.getBoardSquares()[fromSquareRowIndex][fromSquareColumnIndex].removePiece();
+                }
+            }
             field.changeTurn();
         }
 
