@@ -90,7 +90,7 @@ public class PieceNurseBlueHen extends PieceBlueHen
     @Override
     public boolean validSpawnPath(int fromRow, int fromColumn, int toRow, int toColumn)
     {
-        return true;
+        return false;
     }
 
     @Override
